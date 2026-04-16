@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "queues": [
+    {
+      "id": "queue-A",
+      "name": "VIP Queue",
+      "track": "A",
+      "strategy": "FIFO",
+      "priorityLevel": 2,
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "queue-B",
+      "name": "Priority Queue",
+      "track": "B",
+      "strategy": "FIFO",
+      "priorityLevel": 3,
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "queue-C",
+      "name": "Normal Queue",
+      "track": "C",
+      "strategy": "FIFO",
+      "priorityLevel": 1,
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

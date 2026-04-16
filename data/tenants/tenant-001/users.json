@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "users": [
+    {
+      "id": "admin-1",
+      "fullName": "Main Admin",
+      "username": "admin",
+      "passwordHash": "$2b$10$zggLxL9l7zcA1eAh8oZoy..a9hWmac4wJvcgiil7zH5V13da89nBK",
+      "role": "admin",
+      "allowedTracks": ["A"],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "agent-1",
+      "fullName": "Main Agent",
+      "username": "agent",
+      "passwordHash": "$2b$10$1AuwoxoraUzMWIxQ5b5ZhO26cfSPj6CnHv2kCPpwSRG5oDoQOTsMq",
+      "role": "agent",
+      "allowedTracks": ["B", "C"],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

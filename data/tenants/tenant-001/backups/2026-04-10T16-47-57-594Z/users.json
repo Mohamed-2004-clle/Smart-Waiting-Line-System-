@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "users": [
+    {
+      "id": "admin-1",
+      "fullName": "Main Admin",
+      "username": "admin",
+      "passwordHash": "$2b$10$PmYLa/A7UoT2i3J6w0EnYe209fyWmdRWSMgBX3AE0M//nSatm81YS",
+      "role": "admin",
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

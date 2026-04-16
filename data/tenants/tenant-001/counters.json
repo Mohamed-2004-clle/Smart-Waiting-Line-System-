@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "counters": [
+    {
+      "id": "counter-1",
+      "name": "VIP Counter",
+      "number": 1,
+      "allowedTracks": [
+        "A"
+      ],
+      "requiredRole": "admin",
+      "status": "open",
+      "currentStaffId": "admin-1",
+      "currentTicketId": null,
+      "createdAt": "",
+      "updatedAt": "2026-04-15T00:05:32.484Z"
+    },
+    {
+      "id": "counter-2",
+      "name": "Priority Counter",
+      "number": 2,
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "requiredRole": "agent",
+      "status": "open",
+      "currentStaffId": "agent-1",
+      "currentTicketId": "ticket-1776279244474",
+      "createdAt": "",
+      "updatedAt": "2026-04-15T18:59:49.844Z"
+    }
+  ]
+}

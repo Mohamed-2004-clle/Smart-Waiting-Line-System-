@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "id": "track-A",
+      "name": "VIP Service",
+      "code": "VIP",
+      "track": "A",
+      "prefix": "A",
+      "averageServiceMinutes": 5,
+      "requiredRole": "admin",
+      "customerTypes": ["company", "professional", "vip"],
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "track-B",
+      "name": "Priority Service",
+      "code": "PRIORITY",
+      "track": "B",
+      "prefix": "B",
+      "averageServiceMinutes": 7,
+      "requiredRole": "agent",
+      "customerTypes": ["medical", "elderly", "special-needs"],
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "track-C",
+      "name": "Normal Service",
+      "code": "NORMAL",
+      "track": "C",
+      "prefix": "C",
+      "averageServiceMinutes": 10,
+      "requiredRole": "agent",
+      "customerTypes": ["regular"],
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "queues": [
+    {
+      "id": "queue-general",
+      "name": "General Queue",
+      "serviceIds": ["service-general"],
+      "strategy": "FIFO",
+      "isActive": true,
+      "currentTicketId": null,
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

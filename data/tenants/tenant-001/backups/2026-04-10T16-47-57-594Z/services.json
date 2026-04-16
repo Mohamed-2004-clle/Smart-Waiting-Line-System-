@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "services": [
+    {
+      "id": "service-general",
+      "name": "General Service",
+      "code": "GEN",
+      "prefix": "A",
+      "averageServiceMinutes": 10,
+      "isActive": true,
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

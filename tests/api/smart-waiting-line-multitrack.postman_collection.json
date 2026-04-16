@@ -1,0 +1,762 @@
+{
+  "info": {
+    "_postman_id": "6c6df727-c44f-47da-91af-a0f8a6c8d73a",
+    "name": "Smart Waiting Line System - Multi-Track A/B/C",
+    "description": "Spec-focused API suite for the Smart Waiting Line System.\n\nAssumed baseline before running the collection:\n- tenant `tenant-001`\n- both counters are closed\n- no tickets exist\n\nThe provided PowerShell runner resets `data/tenants/tenant-001/counters.json` and `data/tenants/tenant-001/tickets.json` to the matching fixtures in `tests/api/fixtures/tenant-001-baseline/` before starting a fresh backend.\n\nKnown current backend mismatches this collection is expected to expose:\n- protected counter/ticket routes authorize `staff`, but the seeded second user is role `agent`\n- `POST /api/tickets` validation requires `serviceId`, while the controller/service actually use `track` and `customerType`\n- queue status is verified through `GET /api/tickets` because no public queue-status route is wired",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "tenantId",
+      "value": "tenant-001",
+      "type": "string"
+    },
+    {
+      "key": "adminUsername",
+      "value": "admin",
+      "type": "string"
+    },
+    {
+      "key": "adminPassword",
+      "value": "admin123",
+      "type": "string"
+    },
+    {
+      "key": "agentUsername",
+      "value": "agent",
+      "type": "string"
+    },
+    {
+      "key": "agentPassword",
+      "value": "agent123",
+      "type": "string"
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "agentToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketAId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketANumber",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketBId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketBNumber",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketCId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ticketCNumber",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "00 Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Health endpoint returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Health endpoint returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Health endpoint returns backend-running message', function () { pm.expect(json.message).to.eql('Backend is running'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"username\":\"{{adminUsername}}\",\"password\":\"{{adminPassword}}\"}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "const token = json.data && json.data.token;",
+              "let payload = {};",
+              "if (token) {",
+              "  const encoded = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');",
+              "  const padded = encoded + '='.repeat((4 - (encoded.length % 4)) % 4);",
+              "  payload = JSON.parse(atob(padded));",
+              "}",
+              "pm.test('Admin login returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Admin login returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Admin login returns JWT token', function () { pm.expect(token).to.be.a('string').and.not.empty; });",
+              "pm.test('Admin response user.allowedTracks is [A]', function () { pm.expect(json.data.user.allowedTracks).to.eql(['A']); });",
+              "pm.test('Admin JWT payload contains allowedTracks [A]', function () { pm.expect(payload.allowedTracks).to.eql(['A']); });",
+              "pm.collectionVariables.set('adminToken', token || '');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Login Agent",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"username\":\"{{agentUsername}}\",\"password\":\"{{agentPassword}}\"}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "const token = json.data && json.data.token;",
+              "let payload = {};",
+              "if (token) {",
+              "  const encoded = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');",
+              "  const padded = encoded + '='.repeat((4 - (encoded.length % 4)) % 4);",
+              "  payload = JSON.parse(atob(padded));",
+              "}",
+              "pm.test('Agent login returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Agent login returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Agent login returns JWT token', function () { pm.expect(token).to.be.a('string').and.not.empty; });",
+              "pm.test('Agent response user.allowedTracks is [B, C]', function () { pm.expect(json.data.user.allowedTracks).to.eql(['B', 'C']); });",
+              "pm.test('Agent JWT payload contains allowedTracks [B, C]', function () { pm.expect(payload.allowedTracks).to.eql(['B', 'C']); });",
+              "pm.collectionVariables.set('agentToken', token || '');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Create Track B Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"serviceId\":\"track-B\",\"track\":\"B\",\"customerType\":\"medical\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Track B ticket returns 201', function () { pm.response.to.have.status(201); });",
+              "pm.test('Track B ticket returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Track B ticket number has B prefix', function () { pm.expect(json.data.number).to.match(/^B-/); });",
+              "pm.test('Track B ticket track is B', function () { pm.expect(json.data.track).to.eql('B'); });",
+              "pm.test('Track B ticket status is waiting', function () { pm.expect(json.data.status).to.eql('waiting'); });",
+              "pm.collectionVariables.set('ticketBId', json.data.id);",
+              "pm.collectionVariables.set('ticketBNumber', json.data.number);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Agent Call Next Without Open Counter",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/call-next"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Call next without open counter returns 400', function () { pm.response.to.have.status(400); });",
+              "pm.test('Call next without open counter returns success=false', function () { pm.expect(json.success).to.eql(false); });",
+              "pm.test('Call next without open counter returns the expected message', function () { pm.expect(json.message).to.eql('You must open a counter first'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Open Counter-1 As Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"counterId\":\"counter-1\"}"
+        },
+        "url": "{{baseUrl}}/api/counters/open"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Admin opens counter-1 with 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Admin open counter-1 returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Admin opened the correct counter', function () { pm.expect(json.data.id).to.eql('counter-1'); });",
+              "pm.test('Counter-1 is open', function () { pm.expect(json.data.status).to.eql('open'); });",
+              "pm.test('Counter-1 serves only track A', function () { pm.expect(json.data.allowedTracks).to.eql(['A']); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Open Counter-2 As Agent",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"counterId\":\"counter-2\"}"
+        },
+        "url": "{{baseUrl}}/api/counters/open"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Agent opens counter-2 with 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Agent open counter-2 returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Agent opened the correct counter', function () { pm.expect(json.data.id).to.eql('counter-2'); });",
+              "pm.test('Counter-2 is open', function () { pm.expect(json.data.status).to.eql('open'); });",
+              "pm.test('Counter-2 serves tracks B and C', function () { pm.expect(json.data.allowedTracks).to.eql(['B', 'C']); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Agent Cannot Open Counter-1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"counterId\":\"counter-1\"}"
+        },
+        "url": "{{baseUrl}}/api/counters/open"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Agent opening counter-1 returns 403', function () { pm.response.to.have.status(403); });",
+              "pm.test('Agent opening counter-1 returns success=false', function () { pm.expect(json.success).to.eql(false); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Admin Cannot Open Counter-2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"counterId\":\"counter-2\"}"
+        },
+        "url": "{{baseUrl}}/api/counters/open"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Admin opening counter-2 returns 403', function () { pm.response.to.have.status(403); });",
+              "pm.test('Admin opening counter-2 returns success=false', function () { pm.expect(json.success).to.eql(false); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 Create Track A Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"serviceId\":\"track-A\",\"track\":\"A\",\"customerType\":\"company\",\"companyName\":\"Acme Corp\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Track A ticket returns 201', function () { pm.response.to.have.status(201); });",
+              "pm.test('Track A ticket returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Track A ticket number has A prefix', function () { pm.expect(json.data.number).to.match(/^A-/); });",
+              "pm.test('Track A ticket track is A', function () { pm.expect(json.data.track).to.eql('A'); });",
+              "pm.test('Track A ticket status is waiting', function () { pm.expect(json.data.status).to.eql('waiting'); });",
+              "pm.collectionVariables.set('ticketAId', json.data.id);",
+              "pm.collectionVariables.set('ticketANumber', json.data.number);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 Create Track C Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"serviceId\":\"track-C\",\"track\":\"C\",\"customerType\":\"regular\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Track C ticket returns 201', function () { pm.response.to.have.status(201); });",
+              "pm.test('Track C ticket returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Track C ticket number has C prefix', function () { pm.expect(json.data.number).to.match(/^C-/); });",
+              "pm.test('Track C ticket track is C', function () { pm.expect(json.data.track).to.eql('C'); });",
+              "pm.test('Track C ticket status is waiting', function () { pm.expect(json.data.status).to.eql('waiting'); });",
+              "pm.collectionVariables.set('ticketCId', json.data.id);",
+              "pm.collectionVariables.set('ticketCNumber', json.data.number);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 Queue Snapshot After Creation",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tickets?tenantId={{tenantId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "const tickets = json.data || [];",
+              "const findWaiting = (track) => tickets.find((ticket) => ticket.track === track && ticket.status === 'waiting');",
+              "const ticketA = findWaiting('A');",
+              "const ticketB = findWaiting('B');",
+              "const ticketC = findWaiting('C');",
+              "pm.test('Queue snapshot returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Queue snapshot returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('One waiting ticket exists for each track', function () {",
+              "  pm.expect(ticketA && ticketA.id).to.eql(pm.collectionVariables.get('ticketAId'));",
+              "  pm.expect(ticketB && ticketB.id).to.eql(pm.collectionVariables.get('ticketBId'));",
+              "  pm.expect(ticketC && ticketC.id).to.eql(pm.collectionVariables.get('ticketCId'));",
+              "});",
+              "pm.test('Track A queue position and wait time are correct', function () {",
+              "  pm.expect(ticketA.position).to.eql(1);",
+              "  pm.expect(ticketA.estimatedWaitMinutes).to.eql(5);",
+              "});",
+              "pm.test('Track B queue position and wait time are correct', function () {",
+              "  pm.expect(ticketB.position).to.eql(1);",
+              "  pm.expect(ticketB.estimatedWaitMinutes).to.eql(7);",
+              "});",
+              "pm.test('Track C queue position and wait time are correct', function () {",
+              "  pm.expect(ticketC.position).to.eql(1);",
+              "  pm.expect(ticketC.estimatedWaitMinutes).to.eql(10);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 Admin Calls Next From Track A",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/call-next"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Admin call next returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Admin call next returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Admin receives the Track A ticket', function () { pm.expect(json.data.id).to.eql(pm.collectionVariables.get('ticketAId')); });",
+              "pm.test('Admin call next returns track A', function () { pm.expect(json.data.track).to.eql('A'); });",
+              "pm.test('Admin call next returns status called', function () { pm.expect(json.data.status).to.eql('called'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 Agent Calls Next From Track B",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/call-next"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Agent call next returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Agent call next returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Agent receives Track B before Track C', function () { pm.expect(json.data.id).to.eql(pm.collectionVariables.get('ticketBId')); });",
+              "pm.test('Agent call next returns track B', function () { pm.expect(json.data.track).to.eql('B'); });",
+              "pm.test('Agent call next returns status called', function () { pm.expect(json.data.status).to.eql('called'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 Agent Completes Current Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/complete"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Agent complete current ticket returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Agent complete returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Agent completes the Track B ticket', function () { pm.expect(json.data.id).to.eql(pm.collectionVariables.get('ticketBId')); });",
+              "pm.test('Completed ticket remains on track B', function () { pm.expect(json.data.track).to.eql('B'); });",
+              "pm.test('Completed ticket status is completed', function () { pm.expect(json.data.status).to.eql('completed'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 Agent Calls Next From Track C",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{agentToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/call-next"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Second agent call next returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Second agent call next returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Agent receives Track C after Track B is exhausted', function () { pm.expect(json.data.id).to.eql(pm.collectionVariables.get('ticketCId')); });",
+              "pm.test('Second agent call next returns track C', function () { pm.expect(json.data.track).to.eql('C'); });",
+              "pm.test('Second agent call next returns status called', function () { pm.expect(json.data.status).to.eql('called'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "16 Admin Cannot Call Next Twice Without Completing",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\"}"
+        },
+        "url": "{{baseUrl}}/api/tickets/call-next"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Admin second call next returns 400', function () { pm.response.to.have.status(400); });",
+              "pm.test('Admin second call next returns success=false', function () { pm.expect(json.success).to.eql(false); });",
+              "pm.test('Admin second call next returns current-ticket message', function () { pm.expect(json.message).to.eql('This counter already has a current ticket'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "17 Final Queue Snapshot",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/tickets?tenantId={{tenantId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "const tickets = json.data || [];",
+              "const byId = {};",
+              "tickets.forEach((ticket) => { byId[ticket.id] = ticket; });",
+              "const ticketA = byId[pm.collectionVariables.get('ticketAId')];",
+              "const ticketB = byId[pm.collectionVariables.get('ticketBId')];",
+              "const ticketC = byId[pm.collectionVariables.get('ticketCId')];",
+              "pm.test('Final snapshot returns 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Final snapshot returns success=true', function () { pm.expect(json.success).to.eql(true); });",
+              "pm.test('Admin-held ticket A is called', function () { pm.expect(ticketA.status).to.eql('called'); });",
+              "pm.test('Agent-completed ticket B is completed', function () { pm.expect(ticketB.status).to.eql('completed'); });",
+              "pm.test('Agent next ticket C is called', function () { pm.expect(ticketC.status).to.eql('called'); });",
+              "pm.test('No waiting tickets remain after the full flow', function () {",
+              "  pm.expect(tickets.filter((ticket) => ticket.status === 'waiting').length).to.eql(0);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "18 Open Missing Counter Returns 404",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenantId\":\"{{tenantId}}\",\"counterId\":\"counter-404\"}"
+        },
+        "url": "{{baseUrl}}/api/counters/open"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Missing counter open returns 404', function () { pm.response.to.have.status(404); });",
+              "pm.test('Missing counter open returns success=false', function () { pm.expect(json.success).to.eql(false); });",
+              "pm.test('Missing counter open returns Counter not found', function () { pm.expect(json.message).to.eql('Counter not found'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

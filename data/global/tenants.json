@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "tenants": [
+    {
+      "id": "tenant-001",
+      "name": "Demo Tenant",
+      "status": "active",
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}
