@@ -5,8 +5,13 @@ import {
   getActiveUserByUsername,
   saveUsersData
 } from "../repositories/user.repository.js";
+import {
+  getCountersData,
+  saveCountersData
+} from "../repositories/counter.repository.js";
 import { AppError } from "../errors/AppError.js";
 import { logAuditEvent } from "./audit.service.js";
+import { emitToTenant } from "../sockets/index.js";
 
 const ROLE_TRACKS = {
   admin: ["A"],
@@ -28,6 +33,27 @@ export const getAllUsersService = async (tenantId) => {
     createdAt: user.createdAt,
     updatedAt: user.updatedAt
   }));
+};
+
+const buildNextAgentCounter = (existingCounters, newUser) => {
+  const agentCounters = existingCounters.filter(
+    (counter) => counter.requiredRole === "agent"
+  );
+
+  const nextNumber = agentCounters.length + 1;
+
+  return {
+    id: `counter-agent-${Date.now()}`,
+    name: `Agent Counter ${nextNumber}`,
+    number: nextNumber,
+    allowedTracks: ["B", "C"],
+    requiredRole: "agent",
+    status: "closed",
+    currentStaffId: newUser.id,
+    currentTicketId: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
 };
 
 export const createUserService = async (
@@ -62,8 +88,37 @@ export const createUserService = async (
   }
 
   usersData.users.push(newUser);
-
   await saveUsersData(tenantId, usersData);
+
+  let createdCounter = null;
+
+  if (role === "agent") {
+    const countersData = await getCountersData(tenantId);
+
+    if (!Array.isArray(countersData.counters)) {
+      countersData.counters = [];
+    }
+
+    createdCounter = buildNextAgentCounter(countersData.counters, newUser);
+    countersData.counters.push(createdCounter);
+
+    await saveCountersData(tenantId, countersData);
+
+    await logAuditEvent({
+      tenantId,
+      userId: adminUserId,
+      action: "CREATE_AGENT_COUNTER",
+      entityType: "counter",
+      entityId: createdCounter.id,
+      details: {
+        counterName: createdCounter.name,
+        assignedAgentId: newUser.id,
+        assignedAgentUsername: newUser.username
+      }
+    });
+
+    emitToTenant(tenantId, "counter_updated", createdCounter);
+  }
 
   await logAuditEvent({
     tenantId,
@@ -87,7 +142,16 @@ export const createUserService = async (
     isActive: newUser.isActive,
     tenantId: newUser.tenantId,
     createdAt: newUser.createdAt,
-    updatedAt: newUser.updatedAt
+    updatedAt: newUser.updatedAt,
+    autoCreatedCounter: createdCounter
+      ? {
+          id: createdCounter.id,
+          name: createdCounter.name,
+          requiredRole: createdCounter.requiredRole,
+          allowedTracks: createdCounter.allowedTracks,
+          status: createdCounter.status
+        }
+      : null
   };
 };
 
@@ -135,5 +199,93 @@ export const setUserActiveStatusService = async (
     tenantId: updatedUser.tenantId,
     createdAt: updatedUser.createdAt,
     updatedAt: updatedUser.updatedAt
+  };
+};
+
+export const deleteUserService = async (
+  tenantId,
+  userId,
+  adminUserId = null
+) => {
+  const usersData = await getUsersData(tenantId);
+  const countersData = await getCountersData(tenantId);
+
+  const userIndex = usersData.users.findIndex((user) => user.id === userId);
+
+  if (userIndex === -1) {
+    throw new AppError("User not found", 404);
+  }
+
+  const targetUser = usersData.users[userIndex];
+
+  if (targetUser.role !== "agent") {
+    throw new AppError("Only agent users can be deleted", 400);
+  }
+
+  const relatedCounterIndex = countersData.counters.findIndex(
+    (counter) =>
+      counter.requiredRole === "agent" && counter.currentStaffId === targetUser.id
+  );
+
+  if (relatedCounterIndex !== -1) {
+    const relatedCounter = countersData.counters[relatedCounterIndex];
+
+    if (relatedCounter.currentTicketId) {
+      throw new AppError(
+        "Cannot delete agent while their counter has a current ticket",
+        400
+      );
+    }
+
+    if (relatedCounter.status === "open") {
+      throw new AppError(
+        "Cannot delete agent while their counter is still open",
+        400
+      );
+    }
+
+    countersData.counters.splice(relatedCounterIndex, 1);
+    await saveCountersData(tenantId, countersData);
+
+    await logAuditEvent({
+      tenantId,
+      userId: adminUserId,
+      action: "DELETE_AGENT_COUNTER",
+      entityType: "counter",
+      entityId: relatedCounter.id,
+      details: {
+        counterName: relatedCounter.name,
+        deletedAgentId: targetUser.id,
+        deletedAgentUsername: targetUser.username
+      }
+    });
+
+    emitToTenant(tenantId, "counter_updated", {
+      id: relatedCounter.id,
+      deleted: true
+    });
+  }
+
+  usersData.users.splice(userIndex, 1);
+  await saveUsersData(tenantId, usersData);
+
+  await logAuditEvent({
+    tenantId,
+    userId: adminUserId,
+    action: "DELETE_USER",
+    entityType: "user",
+    entityId: targetUser.id,
+    details: {
+      username: targetUser.username,
+      role: targetUser.role
+    }
+  });
+
+  return {
+    id: targetUser.id,
+    fullName: targetUser.fullName,
+    username: targetUser.username,
+    role: targetUser.role,
+    deleted: true
   };
 };

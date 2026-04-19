@@ -13,7 +13,7 @@
       "currentStaffId": "admin-1",
       "currentTicketId": null,
       "createdAt": "",
-      "updatedAt": "2026-04-15T00:05:32.484Z"
+      "updatedAt": "2026-04-19T00:13:34.670Z"
     },
     {
       "id": "counter-2",
@@ -26,9 +26,9 @@
       "requiredRole": "agent",
       "status": "open",
       "currentStaffId": "agent-1",
-      "currentTicketId": "ticket-1776279244474",
+      "currentTicketId": null,
       "createdAt": "",
-      "updatedAt": "2026-04-15T18:59:49.844Z"
+      "updatedAt": "2026-04-19T22:43:10.210Z"
     }
   ]
 }

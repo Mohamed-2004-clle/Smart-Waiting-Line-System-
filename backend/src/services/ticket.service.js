@@ -129,7 +129,8 @@ export const createTicketService = async (
     counterId: null,
     createdAt: new Date().toISOString(),
     calledAt: null,
-    completedAt: null
+    completedAt: null,
+    absentAt: null
   };
 
   ticketsData.tickets.push(ticket);
@@ -156,12 +157,16 @@ export const createTicketService = async (
   emitToTenant(tenantId, "queue_updated", allTickets);
   emitToTenant(tenantId, "new_ticket", createdTicket);
 
-  const qrCode = await generateTicketQrCodeDataUrl(createdTicket.id, createdTicket.qrCodeHash);
+  const qrCode = await generateTicketQrCodeDataUrl(
+    createdTicket.id,
+    tenantId,
+    createdTicket.qrCodeHash
+  );
 
   return {
     ...createdTicket,
     qrCode,
-    trackingUrl: buildTrackingUrl(createdTicket.id)
+    trackingUrl: buildTrackingUrl(createdTicket.id, tenantId)
   };
 };
 
@@ -196,7 +201,8 @@ export const getPublicTrackingTicketService = async (tenantId, ticketId) => {
     counterId: ticket.counterId,
     createdAt: ticket.createdAt,
     calledAt: ticket.calledAt,
-    completedAt: ticket.completedAt
+    completedAt: ticket.completedAt,
+    absentAt: ticket.absentAt || null
   };
 };
 
@@ -207,6 +213,7 @@ export const getQueueStatusByTrackService = async (tenantId, track) => {
   const waitingTickets = trackTickets.filter((ticket) => ticket.status === "waiting");
   const calledTickets = trackTickets.filter((ticket) => ticket.status === "called");
   const completedTickets = trackTickets.filter((ticket) => ticket.status === "completed");
+  const absentTickets = trackTickets.filter((ticket) => ticket.status === "absent");
 
   return {
     track,
@@ -214,6 +221,7 @@ export const getQueueStatusByTrackService = async (tenantId, track) => {
     waitingTickets: waitingTickets.length,
     calledTickets: calledTickets.length,
     completedTickets: completedTickets.length,
+    absentTickets: absentTickets.length,
     queue: waitingTickets.sort((a, b) => (a.position || 0) - (b.position || 0))
   };
 };
@@ -369,4 +377,72 @@ export const completeCurrentTicketService = async (tenantId, userId = null) => {
   emitToTenant(tenantId, `ticket_updated:${completedTicket.id}`, completedTicket);
 
   return completedTicket;
+};
+
+export const markCurrentTicketAbsentService = async (tenantId, userId = null) => {
+  if (!userId) {
+    throw new AppError("User is required", 401);
+  }
+
+  const openCounter = await getOpenCounterByStaffId(tenantId, userId);
+
+  if (!openCounter) {
+    throw new AppError("You must open a counter first", 400);
+  }
+
+  if (!openCounter.currentTicketId) {
+    throw new AppError("No current ticket on this counter", 404);
+  }
+
+  const ticketsData = await getTicketsData(tenantId);
+  const countersData = await getCountersData(tenantId);
+
+  const ticketIndex = ticketsData.tickets.findIndex(
+    (ticket) => ticket.id === openCounter.currentTicketId
+  );
+  const counterIndex = countersData.counters.findIndex(
+    (counter) => counter.id === openCounter.id
+  );
+
+  if (ticketIndex === -1) {
+    throw new AppError("Ticket not found", 404);
+  }
+
+  if (counterIndex === -1) {
+    throw new AppError("Counter not found", 404);
+  }
+
+  ticketsData.tickets[ticketIndex].status = "absent";
+  ticketsData.tickets[ticketIndex].absentAt = new Date().toISOString();
+
+  countersData.counters[counterIndex].currentTicketId = null;
+  countersData.counters[counterIndex].updatedAt = new Date().toISOString();
+
+  ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
+
+  await saveTicketsData(tenantId, ticketsData);
+  await saveCountersData(tenantId, countersData);
+
+  const absentTicket = ticketsData.tickets[ticketIndex];
+  const allTickets = await getAllTickets(tenantId);
+
+  await logAuditEvent({
+    tenantId,
+    userId,
+    action: "MARK_TICKET_ABSENT",
+    entityType: "ticket",
+    entityId: absentTicket.id,
+    details: {
+      number: absentTicket.number,
+      track: absentTicket.track,
+      counterId: openCounter.id
+    }
+  });
+
+  emitToTenant(tenantId, "ticket_absent", absentTicket);
+  emitToTenant(tenantId, "queue_updated", allTickets);
+  emitToTenant(tenantId, "counter_updated", countersData.counters[counterIndex]);
+  emitToTenant(tenantId, `ticket_updated:${absentTicket.id}`, absentTicket);
+
+  return absentTicket;
 };

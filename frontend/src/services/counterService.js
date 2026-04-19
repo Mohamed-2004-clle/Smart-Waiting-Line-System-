@@ -14,3 +14,12 @@ export const closeCounter = async (tenantId, counterId) => {
   const response = await api.post("/counters/close", { tenantId, counterId });
   return response.data;
 };
+
+export const assignStaffToCounter = async (tenantId, counterId, staffId) => {
+  const response = await api.post("/counters/assign-staff", {
+    tenantId,
+    counterId,
+    staffId
+  });
+  return response.data;
+};

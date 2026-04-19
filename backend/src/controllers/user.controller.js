@@ -1,7 +1,8 @@
 import {
   getAllUsersService,
   createUserService,
-  setUserActiveStatusService
+  setUserActiveStatusService,
+  deleteUserService
 } from "../services/user.service.js";
 
 export const getAllUsersController = async (req, res, next) => {
@@ -74,6 +75,26 @@ export const enableUserController = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "User enabled successfully",
+      data: user
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUserController = async (req, res, next) => {
+  try {
+    const { tenantId, userId } = req.body;
+
+    const user = await deleteUserService(
+      tenantId,
+      userId,
+      req.user?.id || null
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
       data: user
     });
   } catch (error) {

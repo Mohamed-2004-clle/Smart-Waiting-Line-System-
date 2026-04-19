@@ -4,6 +4,7 @@ import StaffLoginPage from "./pages/StaffLoginPage";
 import StaffDashboard from "./pages/StaffDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import TrackingPage from "./pages/TrackingPage";
+import PublicScreen from "./pages/PublicScreen";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/staff/dashboard" element={<StaffDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/track/:ticketId" element={<TrackingPage />} />
+        <Route path="/screen" element={<PublicScreen />} />
       </Routes>
     </BrowserRouter>
   );

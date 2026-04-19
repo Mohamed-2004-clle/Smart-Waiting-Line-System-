@@ -5,7 +5,8 @@ import {
   getPublicTrackingTicketService,
   getQueueStatusByTrackService,
   callNextTicketService,
-  completeCurrentTicketService
+  completeCurrentTicketService,
+  markCurrentTicketAbsentService
 } from "../services/ticket.service.js";
 
 export const createTicketController = async (req, res, next) => {
@@ -122,6 +123,25 @@ export const completeCurrentTicketController = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Ticket completed successfully",
+      data: ticket
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const markCurrentTicketAbsentController = async (req, res, next) => {
+  try {
+    const { tenantId } = req.body;
+
+    const ticket = await markCurrentTicketAbsentService(
+      tenantId,
+      req.user?.id || null
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Ticket marked as absent successfully",
       data: ticket
     });
   } catch (error) {

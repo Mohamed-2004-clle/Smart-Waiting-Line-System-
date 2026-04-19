@@ -7,7 +7,9 @@
       "username": "admin",
       "passwordHash": "$2b$10$zggLxL9l7zcA1eAh8oZoy..a9hWmac4wJvcgiil7zH5V13da89nBK",
       "role": "admin",
-      "allowedTracks": ["A"],
+      "allowedTracks": [
+        "A"
+      ],
       "isActive": true,
       "tenantId": "tenant-001",
       "createdAt": "",
@@ -19,11 +21,29 @@
       "username": "agent",
       "passwordHash": "$2b$10$1AuwoxoraUzMWIxQ5b5ZhO26cfSPj6CnHv2kCPpwSRG5oDoQOTsMq",
       "role": "agent",
-      "allowedTracks": ["B", "C"],
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
       "isActive": true,
       "tenantId": "tenant-001",
       "createdAt": "",
-      "updatedAt": ""
+      "updatedAt": "2026-04-18T23:13:19.161Z"
+    },
+    {
+      "id": "user-1776469220327",
+      "fullName": "limo",
+      "username": "mohamed",
+      "passwordHash": "$2b$10$KZq06fknz9RwzFIA.zUJPeRYWhN2XnJ6lP8ToIEPa4s8y5r18Lbfa",
+      "role": "agent",
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "2026-04-17T23:40:20.327Z",
+      "updatedAt": "2026-04-18T23:14:02.600Z"
     }
   ]
 }

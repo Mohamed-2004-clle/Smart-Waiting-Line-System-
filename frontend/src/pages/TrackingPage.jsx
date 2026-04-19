@@ -14,9 +14,10 @@ export default function TrackingPage() {
   const loadTicket = async () => {
     try {
       const result = await getPublicTrackingTicket(tenantId, ticketId);
-      setTicket(result.data);
+      setTicket(result.data || null);
     } catch (error) {
       console.error("Error loading tracking ticket:", error);
+      setTicket(null);
     } finally {
       setLoading(false);
     }

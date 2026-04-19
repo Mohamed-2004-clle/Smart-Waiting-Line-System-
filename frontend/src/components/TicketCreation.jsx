@@ -100,11 +100,11 @@ export default function TicketCreation() {
           <p>
             <strong>Tracking URL:</strong>{" "}
             <a
-              href={`${createdTicket.trackingUrl}?tenantId=${tenantId}`}
+              href={createdTicket.trackingUrl}
               target="_blank"
               rel="noreferrer"
             >
-              {createdTicket.trackingUrl}?tenantId={tenantId}
+              {createdTicket.trackingUrl}
             </a>
           </p>
 

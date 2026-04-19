@@ -1,41 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 
+const clearInvalidAuthState = () => {
+  try {
+    const rawUser = localStorage.getItem("user");
+    const rawToken = localStorage.getItem("token");
+
+    if (rawUser) {
+      JSON.parse(rawUser);
+    }
+
+    if (rawToken && typeof rawToken !== "string") {
+      localStorage.removeItem("token");
+    }
+  } catch (error) {
+    console.error("Invalid auth state in localStorage:", error);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  }
+};
+
 export default function StaffLoginPage() {
   const [tenantId, setTenantId] = useState("tenant-001");
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("admin123");
+  const [username, setUsername] = useState("agent");
+  const [password, setPassword] = useState("agent123");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    clearInvalidAuthState();
+  }, []);
+
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const result = await login({
-      tenantId,
-      username,
-      password
-    });
+      const result = await login({
+        tenantId,
+        username,
+        password
+      });
 
-    localStorage.setItem("user", JSON.stringify(result.data.user));
-    localStorage.setItem("token", result.data.token);
+      localStorage.setItem("user", JSON.stringify(result.data.user));
+      localStorage.setItem("token", result.data.token);
 
-    if (result.data.user.role === "admin" || result.data.user.role === "staff") {
-      navigate("/staff/dashboard");
-    } else {
+      if (result.data.user.role === "admin") {
+        navigate("/admin");
+        return;
+      }
+
+      if (result.data.user.role === "agent") {
+        navigate("/staff/dashboard");
+        return;
+      }
+
       navigate("/");
+    } catch (error) {
+      console.error("Login error:", error);
+      alert(error.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Login error:", error);
-    alert(error.response?.data?.message || "Login failed");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div style={{ padding: "20px" }}>

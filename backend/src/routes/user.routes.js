@@ -3,7 +3,8 @@ import {
   getAllUsersController,
   createUserController,
   disableUserController,
-  enableUserController
+  enableUserController,
+  deleteUserController
 } from "../controllers/user.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 import { roleMiddleware } from "../middleware/role.middleware.js";
@@ -16,24 +17,6 @@ import {
 
 const router = express.Router();
 
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Get all users
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: tenantId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: List of users
- */
 router.get(
   "/",
   authMiddleware,
@@ -43,42 +26,6 @@ router.get(
   getAllUsersController
 );
 
-/**
- * @swagger
- * /api/users:
- *   post:
- *     summary: Create a new user
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tenantId
- *               - fullName
- *               - username
- *               - password
- *               - role
- *             properties:
- *               tenantId:
- *                 type: string
- *               fullName:
- *                 type: string
- *               username:
- *                 type: string
- *               password:
- *                 type: string
- *               role:
- *                 type: string
- *                 enum: [admin, manager, staff]
- *     responses:
- *       201:
- *         description: User created successfully
- */
 router.post(
   "/",
   authMiddleware,
@@ -88,32 +35,6 @@ router.post(
   createUserController
 );
 
-/**
- * @swagger
- * /api/users/disable:
- *   post:
- *     summary: Disable a user
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tenantId
- *               - userId
- *             properties:
- *               tenantId:
- *                 type: string
- *               userId:
- *                 type: string
- *     responses:
- *       200:
- *         description: User disabled successfully
- */
 router.post(
   "/disable",
   authMiddleware,
@@ -123,32 +44,6 @@ router.post(
   disableUserController
 );
 
-/**
- * @swagger
- * /api/users/enable:
- *   post:
- *     summary: Enable a user
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tenantId
- *               - userId
- *             properties:
- *               tenantId:
- *                 type: string
- *               userId:
- *                 type: string
- *     responses:
- *       200:
- *         description: User enabled successfully
- */
 router.post(
   "/enable",
   authMiddleware,
@@ -156,6 +51,15 @@ router.post(
   userStatusValidator,
   validationMiddleware,
   enableUserController
+);
+
+router.post(
+  "/delete",
+  authMiddleware,
+  roleMiddleware("admin"),
+  userStatusValidator,
+  validationMiddleware,
+  deleteUserController
 );
 
 export default router;

@@ -10,6 +10,7 @@ export const getDashboardAnalyticsService = async (tenantId) => {
   const calledTickets = tickets.filter((ticket) => ticket.status === "called").length;
   const completedTickets = tickets.filter((ticket) => ticket.status === "completed").length;
   const cancelledTickets = tickets.filter((ticket) => ticket.status === "cancelled").length;
+  const absentTickets = tickets.filter((ticket) => ticket.status === "absent").length;
 
   const completedWithTimes = tickets.filter(
     (ticket) => ticket.status === "completed" && ticket.createdAt && ticket.completedAt
@@ -37,6 +38,9 @@ export const getDashboardAnalyticsService = async (tenantId) => {
     const calledByCounter = counterTickets.filter(
       (ticket) => ticket.status === "called"
     ).length;
+    const absentByCounter = counterTickets.filter(
+      (ticket) => ticket.status === "absent"
+    ).length;
 
     return {
       counterId: counter.id,
@@ -46,7 +50,8 @@ export const getDashboardAnalyticsService = async (tenantId) => {
       currentTicketId: counter.currentTicketId,
       totalTicketsHandled: counterTickets.length,
       completedTickets: completedByCounter,
-      calledTickets: calledByCounter
+      calledTickets: calledByCounter,
+      absentTickets: absentByCounter
     };
   });
 
@@ -57,6 +62,7 @@ export const getDashboardAnalyticsService = async (tenantId) => {
       calledTickets,
       completedTickets,
       cancelledTickets,
+      absentTickets,
       averageCompletionMinutes,
       totalCounters: counters.length,
       openCounters,

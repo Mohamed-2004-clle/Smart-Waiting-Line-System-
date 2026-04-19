@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {
   callNextTicket,
   completeCurrentTicket,
-  getAllTickets
+  getAllTickets,
+  markCurrentTicketAbsent
 } from "../services/ticketService";
 import {
   getAllCounters,
@@ -12,6 +13,18 @@ import {
 } from "../services/counterService";
 import socket, { joinTenantRoom } from "../socket/socket";
 
+const getStoredUser = () => {
+  try {
+    const raw = localStorage.getItem("user");
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    console.error("Invalid user in localStorage:", error);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    return null;
+  }
+};
+
 export default function StaffDashboard() {
   const [tickets, setTickets] = useState([]);
   const [currentTicket, setCurrentTicket] = useState(null);
@@ -19,11 +32,12 @@ export default function StaffDashboard() {
   const [selectedCounterId, setSelectedCounterId] = useState("");
   const [loadingCall, setLoadingCall] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
+  const [loadingAbsent, setLoadingAbsent] = useState(false);
   const [loadingOpenCounter, setLoadingOpenCounter] = useState(false);
   const [loadingCloseCounter, setLoadingCloseCounter] = useState(false);
   const navigate = useNavigate();
 
-  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const savedUser = getStoredUser();
   const tenantId = savedUser?.tenantId || "tenant-001";
   const staffId = savedUser?.id || null;
   const role = savedUser?.role || null;
@@ -51,6 +65,10 @@ export default function StaffDashboard() {
       B: visibleTickets.filter((ticket) => ticket.track === "B"),
       C: visibleTickets.filter((ticket) => ticket.track === "C")
     };
+  }, [visibleTickets]);
+
+  const absentTickets = useMemo(() => {
+    return visibleTickets.filter((ticket) => ticket.status === "absent");
   }, [visibleTickets]);
 
   const loadTickets = async () => {
@@ -98,7 +116,20 @@ export default function StaffDashboard() {
       setCurrentTicket(result.data);
     } catch (error) {
       console.error("Error calling next ticket:", error);
-      alert(error.response?.data?.message || "Call next failed");
+
+      const message = error.response?.data?.message || "Call next failed";
+
+      if (
+        error.response?.status === 404 &&
+        (
+          message === "No waiting tickets available for your role" ||
+          message === "No waiting tickets found"
+        )
+      ) {
+        alert("No more waiting tickets in your allowed tracks.");
+      } else {
+        alert(message);
+      }
     } finally {
       setLoadingCall(false);
     }
@@ -114,6 +145,19 @@ export default function StaffDashboard() {
       alert(error.response?.data?.message || "Complete failed");
     } finally {
       setLoadingComplete(false);
+    }
+  };
+
+  const handleMarkAbsent = async () => {
+    try {
+      setLoadingAbsent(true);
+      await markCurrentTicketAbsent(tenantId);
+      setCurrentTicket(null);
+    } catch (error) {
+      console.error("Error marking ticket absent:", error);
+      alert(error.response?.data?.message || "Mark absent failed");
+    } finally {
+      setLoadingAbsent(false);
     }
   };
 
@@ -180,6 +224,12 @@ export default function StaffDashboard() {
       }
     });
 
+    socket.on("ticket_absent", (ticket) => {
+      if (myOpenCounter && ticket.counterId === myOpenCounter.id) {
+        setCurrentTicket(null);
+      }
+    });
+
     socket.on("queue_updated", (updatedTickets) => {
       setTickets(updatedTickets);
 
@@ -202,6 +252,7 @@ export default function StaffDashboard() {
       socket.off("connect");
       socket.off("ticket_called");
       socket.off("ticket_completed");
+      socket.off("ticket_absent");
       socket.off("queue_updated");
       socket.off("counter_updated");
     };
@@ -287,7 +338,29 @@ export default function StaffDashboard() {
         >
           {loadingComplete ? "Completing..." : "Complete Current Ticket"}
         </button>
+
+        <button
+          onClick={handleMarkAbsent}
+          disabled={loadingAbsent || !currentTicket || !myOpenCounter}
+          style={{ marginLeft: "10px" }}
+        >
+          {loadingAbsent ? "Marking..." : "Mark Ticket Absent"}
+        </button>
       </div>
+
+      <h2>Absent Tickets</h2>
+      <p>Total Absent Tickets: {absentTickets.length}</p>
+      {absentTickets.length === 0 ? (
+        <p>No absent tickets</p>
+      ) : (
+        <ul>
+          {absentTickets.map((ticket) => (
+            <li key={ticket.id}>
+              {ticket.number} - {ticket.track} - absent
+            </li>
+          ))}
+        </ul>
+      )}
 
       <h2>Queues By Track</h2>
 

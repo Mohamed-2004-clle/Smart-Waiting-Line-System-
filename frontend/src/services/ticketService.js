@@ -19,3 +19,8 @@ export const completeCurrentTicket = async (tenantId) => {
   const response = await api.post("/tickets/complete", { tenantId });
   return response.data;
 };
+
+export const markCurrentTicketAbsent = async (tenantId) => {
+  const response = await api.post("/tickets/absent", { tenantId });
+  return response.data;
+};
