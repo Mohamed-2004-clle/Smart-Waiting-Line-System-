@@ -7,11 +7,7 @@ import {
   getAllTickets,
   markCurrentTicketAbsent
 } from "../services/ticketService";
-import {
-  getAllCounters,
-  openCounter,
-  closeCounter
-} from "../services/counterService";
+import { getAllCounters } from "../services/counterService";
 import {
   getAllUsers,
   createUser,
@@ -19,6 +15,7 @@ import {
   enableUser,
   deleteUser
 } from "../services/userService";
+import { logout } from "../services/authService";
 import socket, { joinTenantRoom } from "../socket/socket";
 
 const getStoredUser = () => {
@@ -39,14 +36,12 @@ export default function AdminDashboard() {
   const [currentTicket, setCurrentTicket] = useState(null);
   const [counters, setCounters] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selectedCounterId, setSelectedCounterId] = useState("");
   const [loading, setLoading] = useState(true);
   const [loadingCall, setLoadingCall] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
   const [loadingAbsent, setLoadingAbsent] = useState(false);
-  const [loadingOpenCounter, setLoadingOpenCounter] = useState(false);
-  const [loadingCloseCounter, setLoadingCloseCounter] = useState(false);
   const [loadingCreateAgent, setLoadingCreateAgent] = useState(false);
+  const [loadingLogout, setLoadingLogout] = useState(false);
   const [updatingUserId, setUpdatingUserId] = useState(null);
 
   const [newAgentFullName, setNewAgentFullName] = useState("");
@@ -60,22 +55,19 @@ export default function AdminDashboard() {
   const adminId = savedUser?.id || null;
   const role = savedUser?.role || null;
 
-  const adminCounters = useMemo(() => {
-    return counters.filter((counter) => counter.requiredRole === "admin");
-  }, [counters]);
+  const myCounter = useMemo(() => {
+    return (
+      counters.find(
+        (counter) =>
+          counter.requiredRole === "admin" &&
+          counter.currentStaffId === adminId
+      ) || null
+    );
+  }, [counters, adminId]);
 
   const autoCreatedAgentCounters = useMemo(() => {
     return counters.filter((counter) => counter.requiredRole === "agent");
   }, [counters]);
-
-  const myOpenCounter = useMemo(() => {
-    return (
-      adminCounters.find(
-        (counter) =>
-          counter.status === "open" && counter.currentStaffId === adminId
-      ) || null
-    );
-  }, [adminCounters, adminId]);
 
   const trackATickets = useMemo(() => {
     return tickets.filter((ticket) => ticket.track === "A");
@@ -112,8 +104,8 @@ export default function AdminDashboard() {
       allTickets.find(
         (ticket) =>
           ticket.status === "called" &&
-          myOpenCounter &&
-          ticket.counterId === myOpenCounter.id
+          myCounter &&
+          ticket.counterId === myCounter.id
       ) || null;
 
     setCurrentTicket(calledTicket);
@@ -121,16 +113,7 @@ export default function AdminDashboard() {
 
   const loadCounters = async () => {
     const result = await getAllCounters(tenantId);
-    const allCounters = result.data || [];
-    setCounters(allCounters);
-
-    const visibleCounters = allCounters.filter(
-      (counter) => counter.requiredRole === "admin"
-    );
-
-    if (visibleCounters.length > 0 && !selectedCounterId) {
-      setSelectedCounterId(visibleCounters[0].id);
-    }
+    setCounters(result.data || []);
   };
 
   const loadUsers = async () => {
@@ -206,37 +189,6 @@ export default function AdminDashboard() {
       alert(error.response?.data?.message || "Mark absent failed");
     } finally {
       setLoadingAbsent(false);
-    }
-  };
-
-  const handleOpenCounter = async () => {
-    if (!selectedCounterId) return;
-
-    try {
-      setLoadingOpenCounter(true);
-      await openCounter(tenantId, selectedCounterId);
-      await loadAllData();
-    } catch (error) {
-      console.error("Error opening counter:", error);
-      alert(error.response?.data?.message || "Open counter failed");
-    } finally {
-      setLoadingOpenCounter(false);
-    }
-  };
-
-  const handleCloseCounter = async () => {
-    if (!selectedCounterId) return;
-
-    try {
-      setLoadingCloseCounter(true);
-      await closeCounter(tenantId, selectedCounterId);
-      setCurrentTicket(null);
-      await loadAllData();
-    } catch (error) {
-      console.error("Error closing counter:", error);
-      alert(error.response?.data?.message || "Close counter failed");
-    } finally {
-      setLoadingCloseCounter(false);
     }
   };
 
@@ -324,10 +276,19 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    navigate("/staff/login");
+  const handleLogout = async () => {
+    try {
+      setLoadingLogout(true);
+      await logout(tenantId);
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/staff/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+      alert(error.response?.data?.message || "Logout failed");
+    } finally {
+      setLoadingLogout(false);
+    }
   };
 
   useEffect(() => {
@@ -344,42 +305,33 @@ export default function AdminDashboard() {
     loadAllData();
     joinTenantRoom(tenantId);
 
-    socket.on("connect", () => {
+    const handleConnect = () => {
       joinTenantRoom(tenantId);
-    });
+    };
 
-    socket.on("queue_updated", () => {
+    const handleRefresh = () => {
       loadAllData();
-    });
+    };
 
-    socket.on("ticket_called", () => {
-      loadAllData();
-    });
-
-    socket.on("ticket_completed", () => {
-      loadAllData();
-    });
-
-    socket.on("ticket_absent", () => {
-      loadAllData();
-    });
-
-    socket.on("counter_updated", () => {
-      loadAllData();
-    });
+    socket.on("connect", handleConnect);
+    socket.on("queue_updated", handleRefresh);
+    socket.on("ticket_called", handleRefresh);
+    socket.on("ticket_completed", handleRefresh);
+    socket.on("ticket_absent", handleRefresh);
+    socket.on("counter_updated", handleRefresh);
 
     return () => {
-      socket.off("connect");
-      socket.off("queue_updated");
-      socket.off("ticket_called");
-      socket.off("ticket_completed");
-      socket.off("ticket_absent");
-      socket.off("counter_updated");
+      socket.off("connect", handleConnect);
+      socket.off("queue_updated", handleRefresh);
+      socket.off("ticket_called", handleRefresh);
+      socket.off("ticket_completed", handleRefresh);
+      socket.off("ticket_absent", handleRefresh);
+      socket.off("counter_updated", handleRefresh);
     };
-  }, []);
+  }, [tenantId, role, savedUser, navigate]);
 
   useEffect(() => {
-    if (!myOpenCounter) {
+    if (!myCounter) {
       setCurrentTicket(null);
       return;
     }
@@ -388,11 +340,11 @@ export default function AdminDashboard() {
       tickets.find(
         (ticket) =>
           ticket.status === "called" &&
-          ticket.counterId === myOpenCounter.id
+          ticket.counterId === myCounter.id
       ) || null;
 
     setCurrentTicket(calledTicket);
-  }, [tickets, myOpenCounter]);
+  }, [tickets, myCounter]);
 
   if (loading) {
     return <div style={{ padding: "20px" }}>Loading admin dashboard...</div>;
@@ -406,8 +358,8 @@ export default function AdminDashboard() {
         Logged in as: <strong>{savedUser?.fullName}</strong> ({savedUser?.role})
       </p>
 
-      <button onClick={handleLogout} style={{ marginBottom: "15px" }}>
-        Logout
+      <button onClick={handleLogout} disabled={loadingLogout} style={{ marginBottom: "15px" }}>
+        {loadingLogout ? "Logging out..." : "Logout"}
       </button>
 
       {analytics && (
@@ -521,44 +473,13 @@ export default function AdminDashboard() {
         </ul>
       )}
 
-      <h2>Admin Counter Management</h2>
-      <div style={{ marginBottom: "15px" }}>
-        <select
-          value={selectedCounterId}
-          onChange={(e) => setSelectedCounterId(e.target.value)}
-        >
-          <option value="">Select admin counter</option>
-          {adminCounters.map((counter) => (
-            <option key={counter.id} value={counter.id}>
-              {counter.name} - {counter.status}
-            </option>
-          ))}
-        </select>
-
-        <button
-          onClick={handleOpenCounter}
-          disabled={loadingOpenCounter || !selectedCounterId}
-          style={{ marginLeft: "10px" }}
-        >
-          {loadingOpenCounter ? "Opening..." : "Open Counter"}
-        </button>
-
-        <button
-          onClick={handleCloseCounter}
-          disabled={loadingCloseCounter || !selectedCounterId}
-          style={{ marginLeft: "10px" }}
-        >
-          {loadingCloseCounter ? "Closing..." : "Close Counter"}
-        </button>
-      </div>
-
       <h2>My Admin Counter</h2>
-      {myOpenCounter ? (
+      {myCounter ? (
         <p>
-          {myOpenCounter.name} - {myOpenCounter.status}
+          {myCounter.name} - {myCounter.status}
         </p>
       ) : (
-        <p>No open admin counter assigned to you</p>
+        <p>No dedicated admin counter found for your account</p>
       )}
 
       <h2>Current VIP Ticket</h2>
@@ -573,14 +494,14 @@ export default function AdminDashboard() {
       <div style={{ marginBottom: "20px" }}>
         <button
           onClick={handleCallNext}
-          disabled={loadingCall || currentTicket || !myOpenCounter}
+          disabled={loadingCall || currentTicket || !myCounter || myCounter.status !== "open"}
         >
           {loadingCall ? "Calling..." : "Call Next VIP Ticket"}
         </button>
 
         <button
           onClick={handleCompleteTicket}
-          disabled={loadingComplete || !currentTicket || !myOpenCounter}
+          disabled={loadingComplete || !currentTicket || !myCounter}
           style={{ marginLeft: "10px" }}
         >
           {loadingComplete ? "Completing..." : "Complete Current VIP Ticket"}
@@ -588,7 +509,7 @@ export default function AdminDashboard() {
 
         <button
           onClick={handleMarkAbsent}
-          disabled={loadingAbsent || !currentTicket || !myOpenCounter}
+          disabled={loadingAbsent || !currentTicket || !myCounter}
           style={{ marginLeft: "10px" }}
         >
           {loadingAbsent ? "Marking..." : "Mark VIP Ticket Absent"}

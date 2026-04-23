@@ -6,11 +6,8 @@ import {
   getAllTickets,
   markCurrentTicketAbsent
 } from "../services/ticketService";
-import {
-  getAllCounters,
-  openCounter,
-  closeCounter
-} from "../services/counterService";
+import { getAllCounters } from "../services/counterService";
+import { logout } from "../services/authService";
 import socket, { joinTenantRoom } from "../socket/socket";
 
 const getStoredUser = () => {
@@ -29,28 +26,26 @@ export default function StaffDashboard() {
   const [tickets, setTickets] = useState([]);
   const [currentTicket, setCurrentTicket] = useState(null);
   const [counters, setCounters] = useState([]);
-  const [selectedCounterId, setSelectedCounterId] = useState("");
   const [loadingCall, setLoadingCall] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
   const [loadingAbsent, setLoadingAbsent] = useState(false);
-  const [loadingOpenCounter, setLoadingOpenCounter] = useState(false);
-  const [loadingCloseCounter, setLoadingCloseCounter] = useState(false);
+  const [loadingLogout, setLoadingLogout] = useState(false);
   const navigate = useNavigate();
 
   const savedUser = getStoredUser();
   const tenantId = savedUser?.tenantId || "tenant-001";
   const staffId = savedUser?.id || null;
-  const role = savedUser?.role || null;
 
   const allowedTracks = useMemo(() => {
     return Array.isArray(savedUser?.allowedTracks) ? savedUser.allowedTracks : [];
   }, [savedUser]);
 
-  const myOpenCounter = useMemo(() => {
+  const myCounter = useMemo(() => {
     return (
       counters.find(
         (counter) =>
-          counter.status === "open" && counter.currentStaffId === staffId
+          counter.requiredRole === "agent" &&
+          counter.currentStaffId === staffId
       ) || null
     );
   }, [counters, staffId]);
@@ -81,8 +76,8 @@ export default function StaffDashboard() {
         allTickets.find(
           (ticket) =>
             ticket.status === "called" &&
-            myOpenCounter &&
-            ticket.counterId === myOpenCounter.id
+            myCounter &&
+            ticket.counterId === myCounter.id
         ) || null;
 
       setCurrentTicket(calledTicket);
@@ -95,18 +90,14 @@ export default function StaffDashboard() {
     try {
       const result = await getAllCounters(tenantId);
       const allCounters = result.data || [];
-      const visibleCounters = allCounters.filter((counter) =>
-        counter.requiredRole === role
-      );
-
-      setCounters(visibleCounters);
-
-      if (visibleCounters.length > 0 && !selectedCounterId) {
-        setSelectedCounterId(visibleCounters[0].id);
-      }
+      setCounters(allCounters);
     } catch (error) {
       console.error("Error loading counters:", error);
     }
+  };
+
+  const loadAllData = async () => {
+    await Promise.all([loadCounters(), loadTickets()]);
   };
 
   const handleCallNext = async () => {
@@ -161,42 +152,19 @@ export default function StaffDashboard() {
     }
   };
 
-  const handleOpenCounter = async () => {
-    if (!selectedCounterId) return;
-
+  const handleLogout = async () => {
     try {
-      setLoadingOpenCounter(true);
-      await openCounter(tenantId, selectedCounterId);
-      await loadCounters();
-      await loadTickets();
+      setLoadingLogout(true);
+      await logout(tenantId);
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      navigate("/staff/login");
     } catch (error) {
-      console.error("Error opening counter:", error);
-      alert(error.response?.data?.message || "Open counter failed");
+      console.error("Error logging out:", error);
+      alert(error.response?.data?.message || "Logout failed");
     } finally {
-      setLoadingOpenCounter(false);
+      setLoadingLogout(false);
     }
-  };
-
-  const handleCloseCounter = async () => {
-    if (!selectedCounterId) return;
-
-    try {
-      setLoadingCloseCounter(true);
-      await closeCounter(tenantId, selectedCounterId);
-      await loadCounters();
-      setCurrentTicket(null);
-    } catch (error) {
-      console.error("Error closing counter:", error);
-      alert(error.response?.data?.message || "Close counter failed");
-    } finally {
-      setLoadingCloseCounter(false);
-    }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    navigate("/staff/login");
   };
 
   useEffect(() => {
@@ -205,62 +173,69 @@ export default function StaffDashboard() {
       return;
     }
 
-    loadCounters();
+    loadAllData();
     joinTenantRoom(tenantId);
 
-    socket.on("connect", () => {
+    const handleConnect = () => {
       joinTenantRoom(tenantId);
-    });
+    };
 
-    socket.on("ticket_called", (ticket) => {
-      if (myOpenCounter && ticket.counterId === myOpenCounter.id) {
+    const handleTicketCalled = (ticket) => {
+      if (myCounter && ticket.counterId === myCounter.id) {
         setCurrentTicket(ticket);
       }
-    });
+    };
 
-    socket.on("ticket_completed", (ticket) => {
-      if (myOpenCounter && ticket.counterId === myOpenCounter.id) {
+    const handleTicketCompleted = (ticket) => {
+      if (myCounter && ticket.counterId === myCounter.id) {
         setCurrentTicket(null);
       }
-    });
+    };
 
-    socket.on("ticket_absent", (ticket) => {
-      if (myOpenCounter && ticket.counterId === myOpenCounter.id) {
+    const handleTicketAbsent = (ticket) => {
+      if (myCounter && ticket.counterId === myCounter.id) {
         setCurrentTicket(null);
       }
-    });
+    };
 
-    socket.on("queue_updated", (updatedTickets) => {
+    const handleQueueUpdated = (updatedTickets) => {
       setTickets(updatedTickets);
 
       const calledTicket =
         updatedTickets.find(
           (ticket) =>
             ticket.status === "called" &&
-            myOpenCounter &&
-            ticket.counterId === myOpenCounter.id
+            myCounter &&
+            ticket.counterId === myCounter.id
         ) || null;
 
       setCurrentTicket(calledTicket);
-    });
+    };
 
-    socket.on("counter_updated", () => {
+    const handleCounterUpdated = () => {
       loadCounters();
-    });
+    };
+
+    socket.on("connect", handleConnect);
+    socket.on("ticket_called", handleTicketCalled);
+    socket.on("ticket_completed", handleTicketCompleted);
+    socket.on("ticket_absent", handleTicketAbsent);
+    socket.on("queue_updated", handleQueueUpdated);
+    socket.on("counter_updated", handleCounterUpdated);
 
     return () => {
-      socket.off("connect");
-      socket.off("ticket_called");
-      socket.off("ticket_completed");
-      socket.off("ticket_absent");
-      socket.off("queue_updated");
-      socket.off("counter_updated");
+      socket.off("connect", handleConnect);
+      socket.off("ticket_called", handleTicketCalled);
+      socket.off("ticket_completed", handleTicketCompleted);
+      socket.off("ticket_absent", handleTicketAbsent);
+      socket.off("queue_updated", handleQueueUpdated);
+      socket.off("counter_updated", handleCounterUpdated);
     };
-  }, [myOpenCounter]);
+  }, [tenantId, myCounter, navigate, savedUser]);
 
   useEffect(() => {
     loadTickets();
-  }, [myOpenCounter]);
+  }, [myCounter]);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -270,49 +245,18 @@ export default function StaffDashboard() {
         Logged in as: <strong>{savedUser?.fullName}</strong> ({savedUser?.role})
       </p>
 
-      <button onClick={handleLogout} style={{ marginBottom: "15px" }}>
-        Logout
+      <button onClick={handleLogout} disabled={loadingLogout} style={{ marginBottom: "15px" }}>
+        {loadingLogout ? "Logging out..." : "Logout"}
       </button>
 
       <h2>My Counter</h2>
-      {myOpenCounter ? (
+      {myCounter ? (
         <p>
-          {myOpenCounter.name} - {myOpenCounter.status}
+          {myCounter.name} - {myCounter.status}
         </p>
       ) : (
-        <p>No open counter assigned to you</p>
+        <p>No dedicated counter found for your account</p>
       )}
-
-      <h2>Counter Management</h2>
-      <div style={{ marginBottom: "15px" }}>
-        <select
-          value={selectedCounterId}
-          onChange={(e) => setSelectedCounterId(e.target.value)}
-        >
-          <option value="">Select counter</option>
-          {counters.map((counter) => (
-            <option key={counter.id} value={counter.id}>
-              {counter.name} - {counter.status}
-            </option>
-          ))}
-        </select>
-
-        <button
-          onClick={handleOpenCounter}
-          disabled={loadingOpenCounter || !selectedCounterId}
-          style={{ marginLeft: "10px" }}
-        >
-          {loadingOpenCounter ? "Opening..." : "Open Counter"}
-        </button>
-
-        <button
-          onClick={handleCloseCounter}
-          disabled={loadingCloseCounter || !selectedCounterId}
-          style={{ marginLeft: "10px" }}
-        >
-          {loadingCloseCounter ? "Closing..." : "Close Counter"}
-        </button>
-      </div>
 
       <h2>Current Ticket</h2>
       {currentTicket ? (
@@ -326,14 +270,14 @@ export default function StaffDashboard() {
       <div>
         <button
           onClick={handleCallNext}
-          disabled={loadingCall || currentTicket || !myOpenCounter}
+          disabled={loadingCall || currentTicket || !myCounter || myCounter.status !== "open"}
         >
           {loadingCall ? "Calling..." : "Call Next Ticket"}
         </button>
 
         <button
           onClick={handleCompleteTicket}
-          disabled={loadingComplete || !currentTicket || !myOpenCounter}
+          disabled={loadingComplete || !currentTicket || !myCounter}
           style={{ marginLeft: "10px" }}
         >
           {loadingComplete ? "Completing..." : "Complete Current Ticket"}
@@ -341,7 +285,7 @@ export default function StaffDashboard() {
 
         <button
           onClick={handleMarkAbsent}
-          disabled={loadingAbsent || !currentTicket || !myOpenCounter}
+          disabled={loadingAbsent || !currentTicket || !myCounter}
           style={{ marginLeft: "10px" }}
         >
           {loadingAbsent ? "Marking..." : "Mark Ticket Absent"}

@@ -31,10 +31,10 @@
       "updatedAt": "2026-04-18T23:13:19.161Z"
     },
     {
-      "id": "user-1776469220327",
-      "fullName": "limo",
-      "username": "mohamed",
-      "passwordHash": "$2b$10$KZq06fknz9RwzFIA.zUJPeRYWhN2XnJ6lP8ToIEPa4s8y5r18Lbfa",
+      "id": "user-1776889994562",
+      "fullName": "mohamed",
+      "username": "1234",
+      "passwordHash": "$2b$10$Spct0JmBSEm6A3fKnlLis.pwcqa9oIFppJhOWwbYGFOstHFOlf.Q2",
       "role": "agent",
       "allowedTracks": [
         "B",
@@ -42,8 +42,23 @@
       ],
       "isActive": true,
       "tenantId": "tenant-001",
-      "createdAt": "2026-04-17T23:40:20.327Z",
-      "updatedAt": "2026-04-18T23:14:02.600Z"
+      "createdAt": "2026-04-22T20:33:14.562Z",
+      "updatedAt": "2026-04-22T20:33:14.562Z"
+    },
+    {
+      "id": "user-1776890380063",
+      "fullName": "lolo",
+      "username": "lolo",
+      "passwordHash": "$2b$10$dpCyB86cxSWwBoTMTxJ/P.5PiNmeVAK61wXdSXQsxIaL4Mqj8xbZq",
+      "role": "agent",
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "2026-04-22T20:39:40.063Z",
+      "updatedAt": "2026-04-22T20:39:40.063Z"
     }
   ]
 }

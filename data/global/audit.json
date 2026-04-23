@@ -9139,6 +9139,4641 @@
         "counterId": "counter-2"
       },
       "createdAt": "2026-04-19T22:43:10.228Z"
+    },
+    {
+      "id": "audit-1776885954382",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885954373",
+      "details": {
+        "number": "C-060",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T19:25:54.382Z"
+    },
+    {
+      "id": "audit-1776885960260",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885960247",
+      "details": {
+        "number": "B-006",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:00.260Z"
+    },
+    {
+      "id": "audit-1776885962540",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885962521",
+      "details": {
+        "number": "B-007",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:02.540Z"
+    },
+    {
+      "id": "audit-1776885963557",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963545",
+      "details": {
+        "number": "B-008",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:03.557Z"
+    },
+    {
+      "id": "audit-1776885963692",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963685",
+      "details": {
+        "number": "B-009",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:03.692Z"
+    },
+    {
+      "id": "audit-1776885963843",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963828",
+      "details": {
+        "number": "B-010",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:03.843Z"
+    },
+    {
+      "id": "audit-1776885963980",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963971",
+      "details": {
+        "number": "B-011",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:03.980Z"
+    },
+    {
+      "id": "audit-1776885964160",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885964149",
+      "details": {
+        "number": "B-012",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T19:26:04.160Z"
+    },
+    {
+      "id": "audit-1776886042105",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CLOSE_COUNTER",
+      "entityType": "counter",
+      "entityId": "counter-1",
+      "details": {
+        "name": "VIP Counter"
+      },
+      "createdAt": "2026-04-22T19:27:22.105Z"
+    },
+    {
+      "id": "audit-1776886042873",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "OPEN_COUNTER",
+      "entityType": "counter",
+      "entityId": "counter-1",
+      "details": {
+        "name": "VIP Counter",
+        "allowedTracks": [
+          "A"
+        ],
+        "requiredRole": "admin"
+      },
+      "createdAt": "2026-04-22T19:27:22.873Z"
+    },
+    {
+      "id": "audit-1776886061841",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886061822",
+      "details": {
+        "number": "A-029",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:41.841Z"
+    },
+    {
+      "id": "audit-1776886062605",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062581",
+      "details": {
+        "number": "A-030",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:42.605Z"
+    },
+    {
+      "id": "audit-1776886062917",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062862",
+      "details": {
+        "number": "A-031",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:42.917Z"
+    },
+    {
+      "id": "audit-1776886063161",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063143",
+      "details": {
+        "number": "A-032",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:43.162Z"
+    },
+    {
+      "id": "audit-1776886063464",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063454",
+      "details": {
+        "number": "A-033",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:43.464Z"
+    },
+    {
+      "id": "audit-1776886063677",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063660",
+      "details": {
+        "number": "A-034",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:27:43.677Z"
+    },
+    {
+      "id": "audit-1776886068993",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886061822",
+      "details": {
+        "number": "A-029",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:48.993Z"
+    },
+    {
+      "id": "audit-1776886072104",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886061822",
+      "details": {
+        "number": "A-029",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:52.104Z"
+    },
+    {
+      "id": "audit-1776886073274",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062581",
+      "details": {
+        "number": "A-030",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:53.274Z"
+    },
+    {
+      "id": "audit-1776886074438",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062581",
+      "details": {
+        "number": "A-030",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:54.438Z"
+    },
+    {
+      "id": "audit-1776886075576",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062862",
+      "details": {
+        "number": "A-031",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:55.576Z"
+    },
+    {
+      "id": "audit-1776886076624",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886062862",
+      "details": {
+        "number": "A-031",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:56.624Z"
+    },
+    {
+      "id": "audit-1776886078015",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063143",
+      "details": {
+        "number": "A-032",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:27:58.015Z"
+    },
+    {
+      "id": "audit-1776886083102",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063143",
+      "details": {
+        "number": "A-032",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:28:03.102Z"
+    },
+    {
+      "id": "audit-1776886088205",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063454",
+      "details": {
+        "number": "A-033",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:28:08.205Z"
+    },
+    {
+      "id": "audit-1776886101337",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063454",
+      "details": {
+        "number": "A-033",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:28:21.337Z"
+    },
+    {
+      "id": "audit-1776886134154",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063660",
+      "details": {
+        "number": "A-034",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:28:54.154Z"
+    },
+    {
+      "id": "audit-1776886156011",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886063660",
+      "details": {
+        "number": "A-034",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:16.011Z"
+    },
+    {
+      "id": "audit-1776886166518",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166482",
+      "details": {
+        "number": "A-035",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:26.518Z"
+    },
+    {
+      "id": "audit-1776886166866",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166855",
+      "details": {
+        "number": "A-036",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:26.866Z"
+    },
+    {
+      "id": "audit-1776886167237",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167211",
+      "details": {
+        "number": "A-037",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:27.237Z"
+    },
+    {
+      "id": "audit-1776886167537",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167504",
+      "details": {
+        "number": "A-038",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:27.537Z"
+    },
+    {
+      "id": "audit-1776886167865",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167821",
+      "details": {
+        "number": "A-039",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:27.865Z"
+    },
+    {
+      "id": "audit-1776886168123",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168105",
+      "details": {
+        "number": "A-040",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:28.123Z"
+    },
+    {
+      "id": "audit-1776886168433",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168417",
+      "details": {
+        "number": "A-041",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:28.433Z"
+    },
+    {
+      "id": "audit-1776886168792",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168752",
+      "details": {
+        "number": "A-042",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:28.792Z"
+    },
+    {
+      "id": "audit-1776886169136",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886169057",
+      "details": {
+        "number": "A-043",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T19:29:29.136Z"
+    },
+    {
+      "id": "audit-1776886187625",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166482",
+      "details": {
+        "number": "A-035",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:47.625Z"
+    },
+    {
+      "id": "audit-1776886191196",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166482",
+      "details": {
+        "number": "A-035",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:51.196Z"
+    },
+    {
+      "id": "audit-1776886193140",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166855",
+      "details": {
+        "number": "A-036",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:53.140Z"
+    },
+    {
+      "id": "audit-1776886195223",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886166855",
+      "details": {
+        "number": "A-036",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:55.223Z"
+    },
+    {
+      "id": "audit-1776886197003",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167211",
+      "details": {
+        "number": "A-037",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:57.003Z"
+    },
+    {
+      "id": "audit-1776886199432",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167211",
+      "details": {
+        "number": "A-037",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:29:59.432Z"
+    },
+    {
+      "id": "audit-1776886206813",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167504",
+      "details": {
+        "number": "A-038",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:06.813Z"
+    },
+    {
+      "id": "audit-1776886209473",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167504",
+      "details": {
+        "number": "A-038",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:09.473Z"
+    },
+    {
+      "id": "audit-1776886211395",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167821",
+      "details": {
+        "number": "A-039",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:11.395Z"
+    },
+    {
+      "id": "audit-1776886214014",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886167821",
+      "details": {
+        "number": "A-039",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:14.014Z"
+    },
+    {
+      "id": "audit-1776886216364",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168105",
+      "details": {
+        "number": "A-040",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:16.364Z"
+    },
+    {
+      "id": "audit-1776886218985",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168105",
+      "details": {
+        "number": "A-040",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:18.985Z"
+    },
+    {
+      "id": "audit-1776886220475",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168417",
+      "details": {
+        "number": "A-041",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:20.475Z"
+    },
+    {
+      "id": "audit-1776886222674",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168417",
+      "details": {
+        "number": "A-041",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:22.674Z"
+    },
+    {
+      "id": "audit-1776886224254",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168752",
+      "details": {
+        "number": "A-042",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:24.254Z"
+    },
+    {
+      "id": "audit-1776886229797",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886168752",
+      "details": {
+        "number": "A-042",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:29.797Z"
+    },
+    {
+      "id": "audit-1776886231208",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886169057",
+      "details": {
+        "number": "A-043",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:31.208Z"
+    },
+    {
+      "id": "audit-1776886232806",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776886169057",
+      "details": {
+        "number": "A-043",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T19:30:32.806Z"
+    },
+    {
+      "id": "audit-1776886292654",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "DELETE_USER",
+      "entityType": "user",
+      "entityId": "user-1776469220327",
+      "details": {
+        "username": "mohamed",
+        "role": "agent"
+      },
+      "createdAt": "2026-04-22T19:31:32.654Z"
+    },
+    {
+      "id": "audit-1776886314630",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ]
+      },
+      "createdAt": "2026-04-22T19:31:54.630Z"
+    },
+    {
+      "id": "audit-1776886318078",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885960247",
+      "details": {
+        "number": "B-006",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:31:58.079Z"
+    },
+    {
+      "id": "audit-1776886319594",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885960247",
+      "details": {
+        "number": "B-006",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:31:59.594Z"
+    },
+    {
+      "id": "audit-1776886320504",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885962521",
+      "details": {
+        "number": "B-007",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:00.504Z"
+    },
+    {
+      "id": "audit-1776886321560",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885962521",
+      "details": {
+        "number": "B-007",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:01.560Z"
+    },
+    {
+      "id": "audit-1776886322481",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963545",
+      "details": {
+        "number": "B-008",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:02.481Z"
+    },
+    {
+      "id": "audit-1776886324135",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963545",
+      "details": {
+        "number": "B-008",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:04.135Z"
+    },
+    {
+      "id": "audit-1776886324971",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963685",
+      "details": {
+        "number": "B-009",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:04.971Z"
+    },
+    {
+      "id": "audit-1776886338973",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963685",
+      "details": {
+        "number": "B-009",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:18.973Z"
+    },
+    {
+      "id": "audit-1776886340240",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963828",
+      "details": {
+        "number": "B-010",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:20.240Z"
+    },
+    {
+      "id": "audit-1776886341578",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963828",
+      "details": {
+        "number": "B-010",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:21.578Z"
+    },
+    {
+      "id": "audit-1776886342738",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963971",
+      "details": {
+        "number": "B-011",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:22.738Z"
+    },
+    {
+      "id": "audit-1776886343880",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885963971",
+      "details": {
+        "number": "B-011",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:23.880Z"
+    },
+    {
+      "id": "audit-1776886344840",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885964149",
+      "details": {
+        "number": "B-012",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:24.840Z"
+    },
+    {
+      "id": "audit-1776886345706",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885964149",
+      "details": {
+        "number": "B-012",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:25.706Z"
+    },
+    {
+      "id": "audit-1776886346611",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885954373",
+      "details": {
+        "number": "C-060",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:26.611Z"
+    },
+    {
+      "id": "audit-1776886347585",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776885954373",
+      "details": {
+        "number": "C-060",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T19:32:27.585Z"
+    },
+    {
+      "id": "audit-1776888178756",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:02:58.756Z"
+    },
+    {
+      "id": "audit-1776888488552",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488538",
+      "details": {
+        "number": "C-061",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:08.552Z"
+    },
+    {
+      "id": "audit-1776888488858",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488813",
+      "details": {
+        "number": "C-062",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:08.858Z"
+    },
+    {
+      "id": "audit-1776888489076",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489055",
+      "details": {
+        "number": "C-063",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:09.076Z"
+    },
+    {
+      "id": "audit-1776888489324",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489311",
+      "details": {
+        "number": "C-064",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:09.324Z"
+    },
+    {
+      "id": "audit-1776888489462",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489443",
+      "details": {
+        "number": "C-065",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:09.462Z"
+    },
+    {
+      "id": "audit-1776888489606",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489580",
+      "details": {
+        "number": "C-066",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:08:09.606Z"
+    },
+    {
+      "id": "audit-1776888499022",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488538",
+      "details": {
+        "number": "C-061",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:19.022Z"
+    },
+    {
+      "id": "audit-1776888516606",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488538",
+      "details": {
+        "number": "C-061",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:36.606Z"
+    },
+    {
+      "id": "audit-1776888524922",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488813",
+      "details": {
+        "number": "C-062",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:44.922Z"
+    },
+    {
+      "id": "audit-1776888532768",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:52.768Z"
+    },
+    {
+      "id": "audit-1776888535209",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888488813",
+      "details": {
+        "number": "C-062",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:55.209Z"
+    },
+    {
+      "id": "audit-1776888539555",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489055",
+      "details": {
+        "number": "C-063",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:08:59.555Z"
+    },
+    {
+      "id": "audit-1776888752086",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489055",
+      "details": {
+        "number": "C-063",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:12:32.086Z"
+    },
+    {
+      "id": "audit-1776888764556",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "role": "agent",
+        "autoClosedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:12:44.556Z"
+    },
+    {
+      "id": "audit-1776889908643",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "role": "agent",
+        "autoClosedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:31:48.643Z"
+    },
+    {
+      "id": "audit-1776889911500",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:31:51.500Z"
+    },
+    {
+      "id": "audit-1776889924231",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489311",
+      "details": {
+        "number": "C-064",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:04.231Z"
+    },
+    {
+      "id": "audit-1776889925251",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489311",
+      "details": {
+        "number": "C-064",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:05.251Z"
+    },
+    {
+      "id": "audit-1776889926334",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489443",
+      "details": {
+        "number": "C-065",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:06.334Z"
+    },
+    {
+      "id": "audit-1776889927258",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489443",
+      "details": {
+        "number": "C-065",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:07.258Z"
+    },
+    {
+      "id": "audit-1776889928547",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489580",
+      "details": {
+        "number": "C-066",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:08.547Z"
+    },
+    {
+      "id": "audit-1776889930478",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776888489580",
+      "details": {
+        "number": "C-066",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:32:10.478Z"
+    },
+    {
+      "id": "audit-1776889968667",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": null
+      },
+      "createdAt": "2026-04-22T20:32:48.667Z"
+    },
+    {
+      "id": "audit-1776889994596",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CREATE_AGENT_COUNTER",
+      "entityType": "counter",
+      "entityId": "counter-agent-1776889994576",
+      "details": {
+        "counterName": "Agent Counter 2",
+        "assignedAgentId": "user-1776889994562",
+        "assignedAgentUsername": "1234"
+      },
+      "createdAt": "2026-04-22T20:33:14.596Z"
+    },
+    {
+      "id": "audit-1776889994627",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CREATE_USER",
+      "entityType": "user",
+      "entityId": "user-1776889994562",
+      "details": {
+        "username": "1234",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ]
+      },
+      "createdAt": "2026-04-22T20:33:14.627Z"
+    },
+    {
+      "id": "audit-1776890017935",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "role": "admin",
+        "autoClosedCounterId": null
+      },
+      "createdAt": "2026-04-22T20:33:37.935Z"
+    },
+    {
+      "id": "audit-1776890031605",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "user-1776889994562",
+      "details": {
+        "username": "1234",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:33:51.605Z"
+    },
+    {
+      "id": "audit-1776890046010",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890045993",
+      "details": {
+        "number": "C-067",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:34:06.010Z"
+    },
+    {
+      "id": "audit-1776890048918",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890048900",
+      "details": {
+        "number": "C-068",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:34:08.918Z"
+    },
+    {
+      "id": "audit-1776890050331",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890050316",
+      "details": {
+        "number": "C-069",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:34:10.331Z"
+    },
+    {
+      "id": "audit-1776890051239",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890051221",
+      "details": {
+        "number": "C-070",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T20:34:11.239Z"
+    },
+    {
+      "id": "audit-1776890055245",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055230",
+      "details": {
+        "number": "B-013",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:34:15.245Z"
+    },
+    {
+      "id": "audit-1776890055429",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055394",
+      "details": {
+        "number": "B-014",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:34:15.429Z"
+    },
+    {
+      "id": "audit-1776890055696",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055674",
+      "details": {
+        "number": "B-015",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:34:15.696Z"
+    },
+    {
+      "id": "audit-1776890055901",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055882",
+      "details": {
+        "number": "B-016",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:34:15.901Z"
+    },
+    {
+      "id": "audit-1776890071761",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055230",
+      "details": {
+        "number": "B-013",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:31.761Z"
+    },
+    {
+      "id": "audit-1776890073134",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055230",
+      "details": {
+        "number": "B-013",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:33.134Z"
+    },
+    {
+      "id": "audit-1776890074117",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055394",
+      "details": {
+        "number": "B-014",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:34.117Z"
+    },
+    {
+      "id": "audit-1776890074974",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055394",
+      "details": {
+        "number": "B-014",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:34.974Z"
+    },
+    {
+      "id": "audit-1776890075687",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055674",
+      "details": {
+        "number": "B-015",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:35.687Z"
+    },
+    {
+      "id": "audit-1776890076520",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055674",
+      "details": {
+        "number": "B-015",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:36.520Z"
+    },
+    {
+      "id": "audit-1776890078016",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055882",
+      "details": {
+        "number": "B-016",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:38.016Z"
+    },
+    {
+      "id": "audit-1776890078732",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890055882",
+      "details": {
+        "number": "B-016",
+        "track": "B",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:38.732Z"
+    },
+    {
+      "id": "audit-1776890079642",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890045993",
+      "details": {
+        "number": "C-067",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:39.642Z"
+    },
+    {
+      "id": "audit-1776890080410",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890045993",
+      "details": {
+        "number": "C-067",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:40.410Z"
+    },
+    {
+      "id": "audit-1776890081293",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890048900",
+      "details": {
+        "number": "C-068",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:41.293Z"
+    },
+    {
+      "id": "audit-1776890082825",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890048900",
+      "details": {
+        "number": "C-068",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:42.825Z"
+    },
+    {
+      "id": "audit-1776890084630",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890050316",
+      "details": {
+        "number": "C-069",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:44.630Z"
+    },
+    {
+      "id": "audit-1776890085431",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890050316",
+      "details": {
+        "number": "C-069",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:45.431Z"
+    },
+    {
+      "id": "audit-1776890086309",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890051221",
+      "details": {
+        "number": "C-070",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:46.309Z"
+    },
+    {
+      "id": "audit-1776890087102",
+      "tenantId": "tenant-001",
+      "userId": "user-1776889994562",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890051221",
+      "details": {
+        "number": "C-070",
+        "track": "C",
+        "counterId": "counter-agent-1776889994576"
+      },
+      "createdAt": "2026-04-22T20:34:47.102Z"
+    },
+    {
+      "id": "audit-1776890115488",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:15.488Z"
+    },
+    {
+      "id": "audit-1776890124003",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890123979",
+      "details": {
+        "number": "B-017",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:24.003Z"
+    },
+    {
+      "id": "audit-1776890124318",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124302",
+      "details": {
+        "number": "B-018",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:24.318Z"
+    },
+    {
+      "id": "audit-1776890124640",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124620",
+      "details": {
+        "number": "B-019",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:24.640Z"
+    },
+    {
+      "id": "audit-1776890125002",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124951",
+      "details": {
+        "number": "B-020",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:25.002Z"
+    },
+    {
+      "id": "audit-1776890125368",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125357",
+      "details": {
+        "number": "B-021",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:25.368Z"
+    },
+    {
+      "id": "audit-1776890125695",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125685",
+      "details": {
+        "number": "B-022",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T20:35:25.695Z"
+    },
+    {
+      "id": "audit-1776890131200",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890123979",
+      "details": {
+        "number": "B-017",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:31.200Z"
+    },
+    {
+      "id": "audit-1776890133216",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890123979",
+      "details": {
+        "number": "B-017",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:33.216Z"
+    },
+    {
+      "id": "audit-1776890135753",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124302",
+      "details": {
+        "number": "B-018",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:35.753Z"
+    },
+    {
+      "id": "audit-1776890139663",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124302",
+      "details": {
+        "number": "B-018",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:39.663Z"
+    },
+    {
+      "id": "audit-1776890142267",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124620",
+      "details": {
+        "number": "B-019",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:42.267Z"
+    },
+    {
+      "id": "audit-1776890145033",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124620",
+      "details": {
+        "number": "B-019",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:35:45.033Z"
+    },
+    {
+      "id": "audit-1776890316997",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "role": "agent",
+        "autoClosedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T20:38:36.997Z"
+    },
+    {
+      "id": "audit-1776890329349",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": null
+      },
+      "createdAt": "2026-04-22T20:38:49.349Z"
+    },
+    {
+      "id": "audit-1776890348218",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348211",
+      "details": {
+        "number": "A-044",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.218Z"
+    },
+    {
+      "id": "audit-1776890348341",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348332",
+      "details": {
+        "number": "A-045",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.341Z"
+    },
+    {
+      "id": "audit-1776890348514",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348500",
+      "details": {
+        "number": "A-046",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.514Z"
+    },
+    {
+      "id": "audit-1776890348617",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348612",
+      "details": {
+        "number": "A-047",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.617Z"
+    },
+    {
+      "id": "audit-1776890348787",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348766",
+      "details": {
+        "number": "A-048",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.788Z"
+    },
+    {
+      "id": "audit-1776890348883",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348879",
+      "details": {
+        "number": "A-049",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:08.883Z"
+    },
+    {
+      "id": "audit-1776890349103",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349094",
+      "details": {
+        "number": "A-050",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.103Z"
+    },
+    {
+      "id": "audit-1776890349230",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349221",
+      "details": {
+        "number": "A-051",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.230Z"
+    },
+    {
+      "id": "audit-1776890349363",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349354",
+      "details": {
+        "number": "A-052",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.363Z"
+    },
+    {
+      "id": "audit-1776890349514",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349497",
+      "details": {
+        "number": "A-053",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.514Z"
+    },
+    {
+      "id": "audit-1776890349676",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349652",
+      "details": {
+        "number": "A-054",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.676Z"
+    },
+    {
+      "id": "audit-1776890349799",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349790",
+      "details": {
+        "number": "A-055",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.799Z"
+    },
+    {
+      "id": "audit-1776890349953",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349933",
+      "details": {
+        "number": "A-056",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:09.953Z"
+    },
+    {
+      "id": "audit-1776890350094",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350082",
+      "details": {
+        "number": "A-057",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:10.094Z"
+    },
+    {
+      "id": "audit-1776890350265",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350243",
+      "details": {
+        "number": "A-058",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:10.265Z"
+    },
+    {
+      "id": "audit-1776890350372",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350366",
+      "details": {
+        "number": "A-059",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:10.372Z"
+    },
+    {
+      "id": "audit-1776890350615",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350589",
+      "details": {
+        "number": "A-060",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:10.615Z"
+    },
+    {
+      "id": "audit-1776890350823",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350803",
+      "details": {
+        "number": "A-061",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-22T20:39:10.823Z"
+    },
+    {
+      "id": "audit-1776890354584",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348211",
+      "details": {
+        "number": "A-044",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T20:39:14.584Z"
+    },
+    {
+      "id": "audit-1776890356150",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348211",
+      "details": {
+        "number": "A-044",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T20:39:16.150Z"
+    },
+    {
+      "id": "audit-1776890357831",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348332",
+      "details": {
+        "number": "A-045",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T20:39:17.831Z"
+    },
+    {
+      "id": "audit-1776890380074",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CREATE_AGENT_COUNTER",
+      "entityType": "counter",
+      "entityId": "counter-agent-1776890380067",
+      "details": {
+        "counterName": "Agent Counter 3",
+        "assignedAgentId": "user-1776890380063",
+        "assignedAgentUsername": "lolo"
+      },
+      "createdAt": "2026-04-22T20:39:40.074Z"
+    },
+    {
+      "id": "audit-1776890380080",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CREATE_USER",
+      "entityType": "user",
+      "entityId": "user-1776890380063",
+      "details": {
+        "username": "lolo",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ]
+      },
+      "createdAt": "2026-04-22T20:39:40.080Z"
+    },
+    {
+      "id": "audit-1776890422084",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "user-1776890380063",
+      "details": {
+        "username": "lolo",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:22.084Z"
+    },
+    {
+      "id": "audit-1776890424340",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124951",
+      "details": {
+        "number": "B-020",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:24.340Z"
+    },
+    {
+      "id": "audit-1776890426295",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890124951",
+      "details": {
+        "number": "B-020",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:26.295Z"
+    },
+    {
+      "id": "audit-1776890427202",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125357",
+      "details": {
+        "number": "B-021",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:27.202Z"
+    },
+    {
+      "id": "audit-1776890427946",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125357",
+      "details": {
+        "number": "B-021",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:27.946Z"
+    },
+    {
+      "id": "audit-1776890428669",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125685",
+      "details": {
+        "number": "B-022",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:28.669Z"
+    },
+    {
+      "id": "audit-1776890429316",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890125685",
+      "details": {
+        "number": "B-022",
+        "track": "B",
+        "counterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T20:40:29.316Z"
+    },
+    {
+      "id": "audit-1776891702847",
+      "tenantId": "tenant-001",
+      "userId": "user-1776890380063",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "user-1776890380063",
+      "details": {
+        "role": "agent",
+        "autoClosedCounterId": "counter-agent-1776890380067"
+      },
+      "createdAt": "2026-04-22T21:01:42.847Z"
+    },
+    {
+      "id": "audit-1776891713146",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:01:53.146Z"
+    },
+    {
+      "id": "audit-1776892265534",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:11:05.534Z"
+    },
+    {
+      "id": "audit-1776892578581",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348332",
+      "details": {
+        "number": "A-045",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:18.581Z"
+    },
+    {
+      "id": "audit-1776892581046",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "role": "admin",
+        "autoClosedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:21.046Z"
+    },
+    {
+      "id": "audit-1776892594258",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:34.258Z"
+    },
+    {
+      "id": "audit-1776892607381",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348500",
+      "details": {
+        "number": "A-046",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:47.381Z"
+    },
+    {
+      "id": "audit-1776892608851",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348500",
+      "details": {
+        "number": "A-046",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:48.851Z"
+    },
+    {
+      "id": "audit-1776892609921",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348612",
+      "details": {
+        "number": "A-047",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:49.921Z"
+    },
+    {
+      "id": "audit-1776892611050",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348612",
+      "details": {
+        "number": "A-047",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:51.050Z"
+    },
+    {
+      "id": "audit-1776892613668",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "role": "admin",
+        "autoClosedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-22T21:16:53.668Z"
+    },
+    {
+      "id": "audit-1776892629071",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T21:17:09.071Z"
+    },
+    {
+      "id": "audit-1776901942933",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901942925",
+      "details": {
+        "number": "C-071",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:52:22.933Z"
+    },
+    {
+      "id": "audit-1776901943160",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943154",
+      "details": {
+        "number": "C-072",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:52:23.160Z"
+    },
+    {
+      "id": "audit-1776901943641",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943635",
+      "details": {
+        "number": "C-073",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:52:23.641Z"
+    },
+    {
+      "id": "audit-1776901943981",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943973",
+      "details": {
+        "number": "C-074",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:52:23.981Z"
+    },
+    {
+      "id": "audit-1776901944222",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901944212",
+      "details": {
+        "number": "C-075",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:52:24.222Z"
+    },
+    {
+      "id": "audit-1776902006634",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902006627",
+      "details": {
+        "number": "C-076",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-22T23:53:26.634Z"
+    },
+    {
+      "id": "audit-1776902037538",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T23:53:57.538Z"
+    },
+    {
+      "id": "audit-1776902040361",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901942925",
+      "details": {
+        "number": "C-071",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T23:54:00.361Z"
+    },
+    {
+      "id": "audit-1776902041339",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901942925",
+      "details": {
+        "number": "C-071",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T23:54:01.339Z"
+    },
+    {
+      "id": "audit-1776902042111",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943154",
+      "details": {
+        "number": "C-072",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-22T23:54:02.111Z"
+    },
+    {
+      "id": "audit-1776902197058",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902197034",
+      "details": {
+        "number": "B-023",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-22T23:56:37.058Z"
+    },
+    {
+      "id": "audit-1776902615238",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902615229",
+      "details": {
+        "number": "C-077",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:03:35.238Z"
+    },
+    {
+      "id": "audit-1776902651701",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943154",
+      "details": {
+        "number": "C-072",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:11.701Z"
+    },
+    {
+      "id": "audit-1776902653897",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902197034",
+      "details": {
+        "number": "B-023",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:13.897Z"
+    },
+    {
+      "id": "audit-1776902656161",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902197034",
+      "details": {
+        "number": "B-023",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:16.161Z"
+    },
+    {
+      "id": "audit-1776902661310",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943635",
+      "details": {
+        "number": "C-073",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:21.310Z"
+    },
+    {
+      "id": "audit-1776902663320",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943635",
+      "details": {
+        "number": "C-073",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:23.320Z"
+    },
+    {
+      "id": "audit-1776902664897",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943973",
+      "details": {
+        "number": "C-074",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:24.897Z"
+    },
+    {
+      "id": "audit-1776902666617",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901943973",
+      "details": {
+        "number": "C-074",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:26.618Z"
+    },
+    {
+      "id": "audit-1776902669911",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901944212",
+      "details": {
+        "number": "C-075",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:29.911Z"
+    },
+    {
+      "id": "audit-1776902671692",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776901944212",
+      "details": {
+        "number": "C-075",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:31.692Z"
+    },
+    {
+      "id": "audit-1776902673606",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902006627",
+      "details": {
+        "number": "C-076",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:33.606Z"
+    },
+    {
+      "id": "audit-1776902675497",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902006627",
+      "details": {
+        "number": "C-076",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:35.497Z"
+    },
+    {
+      "id": "audit-1776902677520",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902615229",
+      "details": {
+        "number": "C-077",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:04:37.520Z"
+    },
+    {
+      "id": "audit-1776902704119",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776902615229",
+      "details": {
+        "number": "C-077",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:05:04.119Z"
+    },
+    {
+      "id": "audit-1776903237687",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903237677",
+      "details": {
+        "number": "C-078",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:13:57.687Z"
+    },
+    {
+      "id": "audit-1776903239017",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903238983",
+      "details": {
+        "number": "C-079",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:13:59.017Z"
+    },
+    {
+      "id": "audit-1776903239541",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903239511",
+      "details": {
+        "number": "C-080",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:13:59.541Z"
+    },
+    {
+      "id": "audit-1776903267188",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903237677",
+      "details": {
+        "number": "C-078",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:27.188Z"
+    },
+    {
+      "id": "audit-1776903268703",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903237677",
+      "details": {
+        "number": "C-078",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:28.703Z"
+    },
+    {
+      "id": "audit-1776903270423",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903238983",
+      "details": {
+        "number": "C-079",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:30.423Z"
+    },
+    {
+      "id": "audit-1776903274814",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903238983",
+      "details": {
+        "number": "C-079",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:34.814Z"
+    },
+    {
+      "id": "audit-1776903277901",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903239511",
+      "details": {
+        "number": "C-080",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:37.901Z"
+    },
+    {
+      "id": "audit-1776903286476",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903239511",
+      "details": {
+        "number": "C-080",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:14:46.476Z"
+    },
+    {
+      "id": "audit-1776903691828",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691818",
+      "details": {
+        "number": "C-081",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:21:31.828Z"
+    },
+    {
+      "id": "audit-1776903691968",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691923",
+      "details": {
+        "number": "C-082",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:21:31.968Z"
+    },
+    {
+      "id": "audit-1776903692210",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692191",
+      "details": {
+        "number": "C-083",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:21:32.210Z"
+    },
+    {
+      "id": "audit-1776903692446",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692418",
+      "details": {
+        "number": "C-084",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:21:32.446Z"
+    },
+    {
+      "id": "audit-1776903692798",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692749",
+      "details": {
+        "number": "C-085",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:21:32.798Z"
+    },
+    {
+      "id": "audit-1776903725182",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691818",
+      "details": {
+        "number": "C-081",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:05.182Z"
+    },
+    {
+      "id": "audit-1776903726668",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691818",
+      "details": {
+        "number": "C-081",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:06.668Z"
+    },
+    {
+      "id": "audit-1776903728749",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691923",
+      "details": {
+        "number": "C-082",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:08.749Z"
+    },
+    {
+      "id": "audit-1776903732542",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903691923",
+      "details": {
+        "number": "C-082",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:12.542Z"
+    },
+    {
+      "id": "audit-1776903733855",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692191",
+      "details": {
+        "number": "C-083",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:13.855Z"
+    },
+    {
+      "id": "audit-1776903735827",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692191",
+      "details": {
+        "number": "C-083",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:15.827Z"
+    },
+    {
+      "id": "audit-1776903737289",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692418",
+      "details": {
+        "number": "C-084",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:17.289Z"
+    },
+    {
+      "id": "audit-1776903739821",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692418",
+      "details": {
+        "number": "C-084",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:19.821Z"
+    },
+    {
+      "id": "audit-1776903741914",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692749",
+      "details": {
+        "number": "C-085",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:21.914Z"
+    },
+    {
+      "id": "audit-1776903744652",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776903692749",
+      "details": {
+        "number": "C-085",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T00:22:24.652Z"
+    },
+    {
+      "id": "audit-1776904910206",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776904910194",
+      "details": {
+        "number": "A-062",
+        "track": "A",
+        "customerType": "company"
+      },
+      "createdAt": "2026-04-23T00:41:50.206Z"
+    },
+    {
+      "id": "audit-1776905301456",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905301445",
+      "details": {
+        "number": "A-063",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T00:48:21.456Z"
+    },
+    {
+      "id": "audit-1776905305172",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905305163",
+      "details": {
+        "number": "B-024",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-23T00:48:25.172Z"
+    },
+    {
+      "id": "audit-1776905307209",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905307202",
+      "details": {
+        "number": "C-086",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T00:48:27.209Z"
+    },
+    {
+      "id": "audit-1776905989960",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905989951",
+      "details": {
+        "number": "A-064",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T00:59:49.960Z"
+    },
+    {
+      "id": "audit-1776906012466",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:00:12.466Z"
+    },
+    {
+      "id": "audit-1776906016010",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906015983",
+      "details": {
+        "number": "A-065",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:00:16.010Z"
+    },
+    {
+      "id": "audit-1776906022480",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906022473",
+      "details": {
+        "number": "A-066",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:00:22.480Z"
+    },
+    {
+      "id": "audit-1776906405236",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906405227",
+      "details": {
+        "number": "A-067",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:06:45.236Z"
+    },
+    {
+      "id": "audit-1776906416627",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906416603",
+      "details": {
+        "number": "A-068",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:06:56.627Z"
+    },
+    {
+      "id": "audit-1776907194107",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907194089",
+      "details": {
+        "number": "A-069",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:19:54.107Z"
+    },
+    {
+      "id": "audit-1776907202833",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907202815",
+      "details": {
+        "number": "B-025",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-23T01:20:02.833Z"
+    },
+    {
+      "id": "audit-1776907221489",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907221478",
+      "details": {
+        "number": "A-070",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:20:21.489Z"
+    },
+    {
+      "id": "audit-1776907456776",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907456767",
+      "details": {
+        "number": "A-071",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:24:16.776Z"
+    },
+    {
+      "id": "audit-1776907464499",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907464445",
+      "details": {
+        "number": "B-026",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-23T01:24:24.499Z"
+    },
+    {
+      "id": "audit-1776907469372",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907469358",
+      "details": {
+        "number": "C-087",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T01:24:29.372Z"
+    },
+    {
+      "id": "audit-1776907472528",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907472500",
+      "details": {
+        "number": "A-072",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:24:32.528Z"
+    },
+    {
+      "id": "audit-1776907475960",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907475950",
+      "details": {
+        "number": "A-073",
+        "track": "A",
+        "customerType": "professional"
+      },
+      "createdAt": "2026-04-23T01:24:35.960Z"
+    },
+    {
+      "id": "audit-1776907496482",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905305163",
+      "details": {
+        "number": "B-024",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:24:56.482Z"
+    },
+    {
+      "id": "audit-1776907500979",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905305163",
+      "details": {
+        "number": "B-024",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:00.979Z"
+    },
+    {
+      "id": "audit-1776907503501",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907202815",
+      "details": {
+        "number": "B-025",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:03.501Z"
+    },
+    {
+      "id": "audit-1776907508774",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907202815",
+      "details": {
+        "number": "B-025",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:08.774Z"
+    },
+    {
+      "id": "audit-1776907510330",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907464445",
+      "details": {
+        "number": "B-026",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:10.330Z"
+    },
+    {
+      "id": "audit-1776907516108",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907464445",
+      "details": {
+        "number": "B-026",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:16.108Z"
+    },
+    {
+      "id": "audit-1776907517209",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905307202",
+      "details": {
+        "number": "C-086",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:17.209Z"
+    },
+    {
+      "id": "audit-1776907518103",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905307202",
+      "details": {
+        "number": "C-086",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:18.103Z"
+    },
+    {
+      "id": "audit-1776907519163",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907469358",
+      "details": {
+        "number": "C-087",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:19.163Z"
+    },
+    {
+      "id": "audit-1776907521928",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907469358",
+      "details": {
+        "number": "C-087",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:21.928Z"
+    },
+    {
+      "id": "audit-1776907526646",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907526615",
+      "details": {
+        "number": "B-027",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-23T01:25:26.646Z"
+    },
+    {
+      "id": "audit-1776907545207",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907526615",
+      "details": {
+        "number": "B-027",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:45.207Z"
+    },
+    {
+      "id": "audit-1776907548973",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907526615",
+      "details": {
+        "number": "B-027",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:48.973Z"
+    },
+    {
+      "id": "audit-1776907557286",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "role": "agent",
+        "autoClosedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:25:57.286Z"
+    },
+    {
+      "id": "audit-1776907572549",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:12.549Z"
+    },
+    {
+      "id": "audit-1776907576397",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348766",
+      "details": {
+        "number": "A-048",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:16.397Z"
+    },
+    {
+      "id": "audit-1776907593641",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348766",
+      "details": {
+        "number": "A-048",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:33.641Z"
+    },
+    {
+      "id": "audit-1776907595053",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348879",
+      "details": {
+        "number": "A-049",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:35.053Z"
+    },
+    {
+      "id": "audit-1776907596259",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890348879",
+      "details": {
+        "number": "A-049",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:36.259Z"
+    },
+    {
+      "id": "audit-1776907598502",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349094",
+      "details": {
+        "number": "A-050",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:38.502Z"
+    },
+    {
+      "id": "audit-1776907599763",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349094",
+      "details": {
+        "number": "A-050",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:39.763Z"
+    },
+    {
+      "id": "audit-1776907600975",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349221",
+      "details": {
+        "number": "A-051",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:40.975Z"
+    },
+    {
+      "id": "audit-1776907602322",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349221",
+      "details": {
+        "number": "A-051",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:42.322Z"
+    },
+    {
+      "id": "audit-1776907603741",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349354",
+      "details": {
+        "number": "A-052",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:43.741Z"
+    },
+    {
+      "id": "audit-1776907605962",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349354",
+      "details": {
+        "number": "A-052",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:45.962Z"
+    },
+    {
+      "id": "audit-1776907606800",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349497",
+      "details": {
+        "number": "A-053",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:46.800Z"
+    },
+    {
+      "id": "audit-1776907607511",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349497",
+      "details": {
+        "number": "A-053",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:47.511Z"
+    },
+    {
+      "id": "audit-1776907608258",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349652",
+      "details": {
+        "number": "A-054",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:48.259Z"
+    },
+    {
+      "id": "audit-1776907608842",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349652",
+      "details": {
+        "number": "A-054",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:48.842Z"
+    },
+    {
+      "id": "audit-1776907609584",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349790",
+      "details": {
+        "number": "A-055",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:49.584Z"
+    },
+    {
+      "id": "audit-1776907610326",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349790",
+      "details": {
+        "number": "A-055",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:50.326Z"
+    },
+    {
+      "id": "audit-1776907611097",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349933",
+      "details": {
+        "number": "A-056",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:51.097Z"
+    },
+    {
+      "id": "audit-1776907611865",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890349933",
+      "details": {
+        "number": "A-056",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:51.865Z"
+    },
+    {
+      "id": "audit-1776907612606",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350082",
+      "details": {
+        "number": "A-057",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:52.606Z"
+    },
+    {
+      "id": "audit-1776907613297",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350082",
+      "details": {
+        "number": "A-057",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:53.297Z"
+    },
+    {
+      "id": "audit-1776907613992",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350243",
+      "details": {
+        "number": "A-058",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:53.992Z"
+    },
+    {
+      "id": "audit-1776907614658",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350243",
+      "details": {
+        "number": "A-058",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:54.658Z"
+    },
+    {
+      "id": "audit-1776907616148",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350366",
+      "details": {
+        "number": "A-059",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:56.148Z"
+    },
+    {
+      "id": "audit-1776907616824",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350366",
+      "details": {
+        "number": "A-059",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:56.824Z"
+    },
+    {
+      "id": "audit-1776907617586",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350589",
+      "details": {
+        "number": "A-060",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:57.586Z"
+    },
+    {
+      "id": "audit-1776907618263",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350589",
+      "details": {
+        "number": "A-060",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:26:58.263Z"
+    },
+    {
+      "id": "audit-1776907621692",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350803",
+      "details": {
+        "number": "A-061",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:01.692Z"
+    },
+    {
+      "id": "audit-1776907622803",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776890350803",
+      "details": {
+        "number": "A-061",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:02.803Z"
+    },
+    {
+      "id": "audit-1776907623731",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776904910194",
+      "details": {
+        "number": "A-062",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:03.731Z"
+    },
+    {
+      "id": "audit-1776907624684",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776904910194",
+      "details": {
+        "number": "A-062",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:04.684Z"
+    },
+    {
+      "id": "audit-1776907625538",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905301445",
+      "details": {
+        "number": "A-063",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:05.538Z"
+    },
+    {
+      "id": "audit-1776907627782",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905301445",
+      "details": {
+        "number": "A-063",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:07.782Z"
+    },
+    {
+      "id": "audit-1776907628689",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905989951",
+      "details": {
+        "number": "A-064",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:08.689Z"
+    },
+    {
+      "id": "audit-1776907629893",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776905989951",
+      "details": {
+        "number": "A-064",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:09.893Z"
+    },
+    {
+      "id": "audit-1776907630880",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906015983",
+      "details": {
+        "number": "A-065",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:10.880Z"
+    },
+    {
+      "id": "audit-1776907633268",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906015983",
+      "details": {
+        "number": "A-065",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:13.268Z"
+    },
+    {
+      "id": "audit-1776907634414",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906022473",
+      "details": {
+        "number": "A-066",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:14.414Z"
+    },
+    {
+      "id": "audit-1776907635309",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906022473",
+      "details": {
+        "number": "A-066",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:15.309Z"
+    },
+    {
+      "id": "audit-1776907635966",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906405227",
+      "details": {
+        "number": "A-067",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:15.966Z"
+    },
+    {
+      "id": "audit-1776907636710",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906405227",
+      "details": {
+        "number": "A-067",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:16.710Z"
+    },
+    {
+      "id": "audit-1776907637463",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906416603",
+      "details": {
+        "number": "A-068",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:17.463Z"
+    },
+    {
+      "id": "audit-1776907639950",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776906416603",
+      "details": {
+        "number": "A-068",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:19.950Z"
+    },
+    {
+      "id": "audit-1776907640716",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907194089",
+      "details": {
+        "number": "A-069",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:20.716Z"
+    },
+    {
+      "id": "audit-1776907641402",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907194089",
+      "details": {
+        "number": "A-069",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:21.402Z"
+    },
+    {
+      "id": "audit-1776907642055",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907221478",
+      "details": {
+        "number": "A-070",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:22.055Z"
+    },
+    {
+      "id": "audit-1776907642793",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907221478",
+      "details": {
+        "number": "A-070",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:22.793Z"
+    },
+    {
+      "id": "audit-1776907643533",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907456767",
+      "details": {
+        "number": "A-071",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:23.533Z"
+    },
+    {
+      "id": "audit-1776907644124",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907456767",
+      "details": {
+        "number": "A-071",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:24.124Z"
+    },
+    {
+      "id": "audit-1776907644827",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907472500",
+      "details": {
+        "number": "A-072",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:24.827Z"
+    },
+    {
+      "id": "audit-1776907645762",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907472500",
+      "details": {
+        "number": "A-072",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:25.762Z"
+    },
+    {
+      "id": "audit-1776907648160",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907475950",
+      "details": {
+        "number": "A-073",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:28.160Z"
+    },
+    {
+      "id": "audit-1776907652196",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776907475950",
+      "details": {
+        "number": "A-073",
+        "track": "A",
+        "counterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:27:32.196Z"
+    },
+    {
+      "id": "audit-1776908017792",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "role": "admin",
+        "autoClosedCounterId": "counter-1"
+      },
+      "createdAt": "2026-04-23T01:33:37.792Z"
+    },
+    {
+      "id": "audit-1776908021194",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:33:41.194Z"
+    },
+    {
+      "id": "audit-1776908029875",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908029868",
+      "details": {
+        "number": "B-028",
+        "track": "B",
+        "customerType": "medical"
+      },
+      "createdAt": "2026-04-23T01:33:49.875Z"
+    },
+    {
+      "id": "audit-1776908033654",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908033645",
+      "details": {
+        "number": "C-088",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T01:33:53.655Z"
+    },
+    {
+      "id": "audit-1776908036468",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908036430",
+      "details": {
+        "number": "C-089",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-04-23T01:33:56.468Z"
+    },
+    {
+      "id": "audit-1776908045396",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908029868",
+      "details": {
+        "number": "B-028",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:05.396Z"
+    },
+    {
+      "id": "audit-1776908047256",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908029868",
+      "details": {
+        "number": "B-028",
+        "track": "B",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:07.256Z"
+    },
+    {
+      "id": "audit-1776908048589",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908033645",
+      "details": {
+        "number": "C-088",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:08.589Z"
+    },
+    {
+      "id": "audit-1776908050727",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "MARK_TICKET_ABSENT",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908033645",
+      "details": {
+        "number": "C-088",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:10.727Z"
+    },
+    {
+      "id": "audit-1776908055073",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "CALL_NEXT_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908036430",
+      "details": {
+        "number": "C-089",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:15.073Z"
+    },
+    {
+      "id": "audit-1776908056709",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "COMPLETE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1776908036430",
+      "details": {
+        "number": "C-089",
+        "track": "C",
+        "counterId": "counter-2"
+      },
+      "createdAt": "2026-04-23T01:34:16.709Z"
     }
   ]
 }
