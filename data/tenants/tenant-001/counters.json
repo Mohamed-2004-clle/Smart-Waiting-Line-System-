@@ -9,11 +9,11 @@
         "A"
       ],
       "requiredRole": "admin",
-      "status": "closed",
+      "status": "open",
       "currentStaffId": "admin-1",
-      "currentTicketId": null,
+      "currentTicketId": "ticket-1776988597510",
       "createdAt": "",
-      "updatedAt": "2026-04-23T01:33:37.664Z"
+      "updatedAt": "2026-04-27T14:57:46.055Z"
     },
     {
       "id": "counter-2",
@@ -28,7 +28,7 @@
       "currentStaffId": "agent-1",
       "currentTicketId": null,
       "createdAt": "",
-      "updatedAt": "2026-04-23T01:34:16.660Z"
+      "updatedAt": "2026-04-27T14:49:12.840Z"
     },
     {
       "id": "counter-agent-1776889994576",
