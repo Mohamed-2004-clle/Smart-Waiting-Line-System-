@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "counters": [
+    {
+      "id": "counter-1",
+      "name": "VIP Counter",
+      "number": 1,
+      "allowedTracks": [
+        "A"
+      ],
+      "requiredRole": "admin",
+      "status": "open",
+      "currentStaffId": "admin-1",
+      "currentTicketId": "ticket-1777561538813",
+      "createdAt": "",
+      "updatedAt": "2026-04-30T16:03:02.738Z"
+    },
+    {
+      "id": "counter-2",
+      "name": "Priority Counter",
+      "number": 2,
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "requiredRole": "agent",
+      "status": "open",
+      "currentStaffId": "agent-1",
+      "currentTicketId": null,
+      "createdAt": "",
+      "updatedAt": "2026-04-30T16:07:53.072Z"
+    },
+    {
+      "id": "counter-agent-1776889994576",
+      "name": "Agent Counter 2",
+      "number": 2,
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "requiredRole": "agent",
+      "status": "open",
+      "currentStaffId": "user-1776889994562",
+      "currentTicketId": null,
+      "createdAt": "2026-04-22T20:33:14.576Z",
+      "updatedAt": "2026-04-22T20:34:47.074Z"
+    },
+    {
+      "id": "counter-agent-1776890380067",
+      "name": "Agent Counter 3",
+      "number": 3,
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "requiredRole": "agent",
+      "status": "closed",
+      "currentStaffId": "user-1776890380063",
+      "currentTicketId": null,
+      "createdAt": "2026-04-22T20:39:40.067Z",
+      "updatedAt": "2026-04-22T21:01:42.813Z"
+    }
+  ]
+}

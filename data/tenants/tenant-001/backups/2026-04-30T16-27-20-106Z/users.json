@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "users": [
+    {
+      "id": "admin-1",
+      "fullName": "Main Admin",
+      "username": "admin",
+      "passwordHash": "$2b$10$zggLxL9l7zcA1eAh8oZoy..a9hWmac4wJvcgiil7zH5V13da89nBK",
+      "role": "admin",
+      "allowedTracks": [
+        "A"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    {
+      "id": "agent-1",
+      "fullName": "Main Agent",
+      "username": "agent",
+      "passwordHash": "$2b$10$1AuwoxoraUzMWIxQ5b5ZhO26cfSPj6CnHv2kCPpwSRG5oDoQOTsMq",
+      "role": "agent",
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "",
+      "updatedAt": "2026-04-18T23:13:19.161Z"
+    },
+    {
+      "id": "user-1776889994562",
+      "fullName": "mohamed",
+      "username": "1234",
+      "passwordHash": "$2b$10$Spct0JmBSEm6A3fKnlLis.pwcqa9oIFppJhOWwbYGFOstHFOlf.Q2",
+      "role": "agent",
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "2026-04-22T20:33:14.562Z",
+      "updatedAt": "2026-04-22T20:33:14.562Z"
+    },
+    {
+      "id": "user-1776890380063",
+      "fullName": "lolo",
+      "username": "lolo",
+      "passwordHash": "$2b$10$dpCyB86cxSWwBoTMTxJ/P.5PiNmeVAK61wXdSXQsxIaL4Mqj8xbZq",
+      "role": "agent",
+      "allowedTracks": [
+        "B",
+        "C"
+      ],
+      "isActive": true,
+      "tenantId": "tenant-001",
+      "createdAt": "2026-04-22T20:39:40.063Z",
+      "updatedAt": "2026-04-22T20:39:40.063Z"
+    }
+  ]
+}
