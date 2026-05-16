@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import app from "./app.js";
 import { initSocket } from "./sockets/index.js";
 import { startBackupScheduler } from "./jobs/backup.job.js";
+import { resetDemoDataOnStartup } from "./services/demoReset.service.js";
 
 const server = http.createServer(app);
 
@@ -22,11 +23,23 @@ const io = new Server(server, {
 });
 
 initSocket(io);
-startBackupScheduler();
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Frontend allowed origin: ${FRONTEND_BASE_URL}`);
-});
+const startServer = async () => {
+  try {
+    await resetDemoDataOnStartup();
+
+    startBackupScheduler();
+
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Frontend allowed origin: ${FRONTEND_BASE_URL}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
