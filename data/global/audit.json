@@ -15868,6 +15868,82 @@
         "counterId": "counter-1"
       },
       "createdAt": "2026-05-16T14:25:26.794Z"
+    },
+    {
+      "id": "audit-1778943029163",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGOUT_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "role": "admin",
+        "autoClosedCounterId": "counter-1"
+      },
+      "createdAt": "2026-05-16T14:50:29.163Z"
+    },
+    {
+      "id": "audit-1779025428814",
+      "tenantId": "tenant-001",
+      "userId": "agent-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "agent-1",
+      "details": {
+        "username": "agent",
+        "role": "agent",
+        "allowedTracks": [
+          "B",
+          "C"
+        ],
+        "autoOpenedCounterId": "counter-2"
+      },
+      "createdAt": "2026-05-17T13:43:48.814Z"
+    },
+    {
+      "id": "audit-1779025457127",
+      "tenantId": "tenant-001",
+      "userId": "admin-1",
+      "action": "LOGIN_SUCCESS",
+      "entityType": "user",
+      "entityId": "admin-1",
+      "details": {
+        "username": "admin",
+        "role": "admin",
+        "allowedTracks": [
+          "A"
+        ],
+        "autoOpenedCounterId": "counter-1"
+      },
+      "createdAt": "2026-05-17T13:44:17.127Z"
+    },
+    {
+      "id": "audit-1779025494245",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1779025494215",
+      "details": {
+        "number": "C-001",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-05-17T13:44:54.245Z"
+    },
+    {
+      "id": "audit-1779025512177",
+      "tenantId": "tenant-001",
+      "userId": null,
+      "action": "CREATE_TICKET",
+      "entityType": "ticket",
+      "entityId": "ticket-1779025512142",
+      "details": {
+        "number": "C-002",
+        "track": "C",
+        "customerType": "regular"
+      },
+      "createdAt": "2026-05-17T13:45:12.177Z"
     }
   ]
 }

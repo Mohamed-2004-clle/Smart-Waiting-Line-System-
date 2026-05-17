@@ -13,7 +13,7 @@
       "currentStaffId": "admin-1",
       "currentTicketId": null,
       "createdAt": "",
-      "updatedAt": "2026-05-16T14:25:26.557Z"
+      "updatedAt": "2026-05-17T13:44:17.094Z"
     },
     {
       "id": "counter-2",
@@ -28,7 +28,7 @@
       "currentStaffId": "agent-1",
       "currentTicketId": null,
       "createdAt": "",
-      "updatedAt": "2026-05-16T14:22:28.739Z"
+      "updatedAt": "2026-05-17T13:43:48.752Z"
     },
     {
       "id": "counter-agent-1776889994576",
@@ -43,7 +43,7 @@
       "currentStaffId": "user-1776889994562",
       "currentTicketId": null,
       "createdAt": "2026-04-22T20:33:14.576Z",
-      "updatedAt": "2026-05-16T14:09:27.396Z"
+      "updatedAt": "2026-05-17T13:43:48.146Z"
     },
     {
       "id": "counter-agent-1776890380067",
@@ -58,7 +58,7 @@
       "currentStaffId": "user-1776890380063",
       "currentTicketId": null,
       "createdAt": "2026-04-22T20:39:40.067Z",
-      "updatedAt": "2026-05-16T14:09:27.396Z"
+      "updatedAt": "2026-05-17T13:43:48.146Z"
     }
   ]
 }
