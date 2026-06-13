@@ -14,6 +14,7 @@ import analyticsRoutes from "./routes/analytics.routes.js";
 import trackingRoutes from "./routes/tracking.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
+import notificationRoutes from "./routes/notification.routes.js";
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/api/counters", counterRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/track", trackingRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.use(errorMiddleware);
 

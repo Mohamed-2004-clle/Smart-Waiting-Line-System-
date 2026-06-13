@@ -1,11 +1,21 @@
-node_modules
-dist
+node_modules/
+dist/
 .env
 .DS_Store
 
-backend/node_modules
+backend/node_modules/
 backend/.env
 
-frontend/node_modules
+frontend/node_modules/
 frontend/.env
-frontend/dist
+frontend/dist/
+
+# Runtime / test data
+data/global/audit.json
+data/tenants/*/tickets.json
+data/tenants/*/counters.json
+data/tenants/*/subscriptions.json
+
+# Mistaken command files
+backend/OST
+backend/curl

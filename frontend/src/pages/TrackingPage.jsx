@@ -3,6 +3,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import socket, { joinTenantRoom } from "../socket/socket";
 import { getPublicTrackingTicket } from "../services/trackingService";
+import { subscribeToTicketNotifications } from "../utils/pushNotifications";
+
 
 // ── Translations (unchanged) ──────────────────────────────
 const translations = {
@@ -36,6 +38,12 @@ const translations = {
     absentMsg: "تم تسجيلك كغائب. يرجى التواصل مع الموظف عند الحاجة.",
     arabic: "العربية",
     english: "English",
+    enableNotifications: "تفعيل الإشعارات",
+    notificationsEnabled: "تم تفعيل الإشعارات بنجاح.",
+    notificationsDenied: "تم رفض صلاحية الإشعارات.",
+    notificationsDismissed: "لم يتم تفعيل الإشعارات.",
+    notificationsNotSupported: "المتصفح لا يدعم الإشعارات.",
+    notificationsError: "تعذر تفعيل الإشعارات.",
   },
   en: {
     pageTitle: "Track Your Ticket",
@@ -67,6 +75,12 @@ const translations = {
     absentMsg: "You were marked absent. Please contact staff if needed.",
     arabic: "العربية",
     english: "English",
+    enableNotifications: "Enable Notifications",
+    notificationsEnabled: "Notifications enabled successfully.",
+    notificationsDenied: "Notifications permission denied.",
+    notificationsDismissed: "Notifications permission dismissed.",
+    notificationsNotSupported: "Notifications are not supported in this browser.",
+    notificationsError: "Could not enable notifications.",
   },
 };
 
@@ -428,6 +442,7 @@ export default function TrackingPage() {
   const [ticket,   setTicket]   = useState(null);
   const [loading,  setLoading]  = useState(true);
   const [language, setLanguage] = useState("ar");
+  const [notificationStatus, setNotificationStatus] = useState("");
 
   const t     = useMemo(() => translations[language], [language]);
   const isRTL = language === "ar";
@@ -486,6 +501,25 @@ export default function TrackingPage() {
   }, [ticket, t]);
 
   const cfg = STATUS_CONFIG[ticket?.status] ?? STATUS_CONFIG.waiting;
+  const handleEnableNotifications = async () => {
+  try {
+    setNotificationStatus(
+      language === "ar"
+        ? "جاري تفعيل الإشعارات..."
+        : "Activating notifications..."
+    );
+
+    await subscribeToTicketNotifications({
+      tenantId,
+      ticketId: ticket.id,
+    });
+
+    setNotificationStatus(t.notificationsEnabled);
+  } catch (error) {
+    console.error("Notification subscription error:", error);
+    setNotificationStatus(t.notificationsError);
+  }
+};
 
   // ── Relevant detail rows (filtered by status) ──────────
   const detailRows = useMemo(() => {
@@ -934,6 +968,52 @@ export default function TrackingPage() {
               {statusMessage}
             </p>
           </motion.div>
+          {/* ── Enable notifications ── */}
+<motion.div
+  variants={itemVariants}
+  style={{
+    ...GLASS,
+    borderRadius: "18px",
+    padding: "18px 20px",
+    marginBottom: "14px",
+    textAlign: "center",
+    borderColor: "rgba(37,99,235,0.25)",
+    background: "rgba(37,99,235,0.08)",
+  }}
+>
+  <motion.button
+    onClick={handleEnableNotifications}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.97 }}
+    style={{
+      padding: "12px 22px",
+      borderRadius: "14px",
+      border: "1px solid rgba(96,165,250,0.35)",
+      background: "linear-gradient(135deg, #2563eb, #7c3aed)",
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: "0.9rem",
+      cursor: "pointer",
+      fontFamily: "'Segoe UI', 'Noto Sans Arabic', system-ui, sans-serif",
+      boxShadow: "0 8px 24px rgba(37,99,235,0.25)",
+    }}
+  >
+    🔔 {t.enableNotifications}
+  </motion.button>
+
+  {notificationStatus && (
+    <p
+      style={{
+        margin: "12px 0 0",
+        color: "rgba(226,232,240,0.85)",
+        fontSize: "0.82rem",
+        fontWeight: 600,
+      }}
+    >
+      {notificationStatus}
+    </p>
+  )}
+</motion.div>
 
           {/* ── Details section ── */}
           <motion.div

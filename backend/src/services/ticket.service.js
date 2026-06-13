@@ -18,6 +18,7 @@ import { getQueueByTrack } from "../repositories/queue.repository.js";
 import { AppError } from "../errors/AppError.js";
 import { emitToTenant } from "../sockets/index.js";
 import { logAuditEvent } from "./audit.service.js";
+import { sendNotificationToTicketService } from "./notification.service.js";
 import {
   generateTicketVerificationHash,
   generateTicketQrCodeDataUrl,
@@ -62,6 +63,64 @@ const recalculateTrackQueueData = async (tenantId, tickets) => {
   });
 
   return updatedTickets;
+};
+const notifyApproachingTickets = async (tenantId, tickets) => {
+  for (const ticket of tickets) {
+    if (
+      ticket.status === "waiting" &&
+      ticket.position !== null &&
+      ticket.position <= 2 &&
+      !ticket.approachNotificationSentAt
+    ) {
+      try {
+        const result = await sendNotificationToTicketService({
+          tenantId,
+          ticketId: ticket.id,
+          title: "Votre tour approche",
+          body: `Votre ticket ${ticket.number} est proche. Position: ${ticket.position}.`,
+          url: `/track/${ticket.id}?tenantId=${tenantId}`
+        });
+
+        if (result?.sent) {
+          ticket.approachNotificationSentAt = new Date().toISOString();
+        }
+      } catch (error) {
+        console.error(
+          `Failed to send approaching notification for ticket ${ticket.id}:`,
+          error.message
+        );
+      }
+    }
+  }
+
+  return tickets;
+};
+
+const notifyCalledTicket = async (tenantId, ticket) => {
+  if (!ticket || ticket.calledNotificationSentAt) {
+    return ticket;
+  }
+
+  try {
+    const result = await sendNotificationToTicketService({
+      tenantId,
+      ticketId: ticket.id,
+      title: "C'est votre tour",
+      body: `Votre ticket ${ticket.number} est appelé. Veuillez vous présenter au guichet ${ticket.counterId || "-"}.`,
+      url: `/track/${ticket.id}?tenantId=${tenantId}`
+    });
+
+    if (result?.sent) {
+      ticket.calledNotificationSentAt = new Date().toISOString();
+    }
+  } catch (error) {
+    console.error(
+      `Failed to send called notification for ticket ${ticket.id}:`,
+      error.message
+    );
+  }
+
+  return ticket;
 };
 
 const getNextTrackForRole = async (tenantId, role) => {
@@ -130,7 +189,9 @@ export const createTicketService = async (
     createdAt: new Date().toISOString(),
     calledAt: null,
     completedAt: null,
-    absentAt: null
+    absentAt: null,
+    approachNotificationSentAt: null,
+    calledNotificationSentAt: null
   };
 
   ticketsData.tickets.push(ticket);
@@ -284,10 +345,13 @@ export const callNextTicketService = async (tenantId, userId = null, role = null
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
 
-  await saveTicketsData(tenantId, ticketsData);
-  await saveCountersData(tenantId, countersData);
+const updatedTicket = ticketsData.tickets[ticketIndex];
 
-  const updatedTicket = ticketsData.tickets[ticketIndex];
+await notifyCalledTicket(tenantId, updatedTicket);
+ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
+
+await saveTicketsData(tenantId, ticketsData);
+await saveCountersData(tenantId, countersData);
   const allTickets = await getAllTickets(tenantId);
 
   await logAuditEvent({
@@ -351,9 +415,10 @@ export const completeCurrentTicketService = async (tenantId, userId = null) => {
   countersData.counters[counterIndex].updatedAt = new Date().toISOString();
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
+ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
 
-  await saveTicketsData(tenantId, ticketsData);
-  await saveCountersData(tenantId, countersData);
+await saveTicketsData(tenantId, ticketsData);
+await saveCountersData(tenantId, countersData);
 
   const completedTicket = ticketsData.tickets[ticketIndex];
   const allTickets = await getAllTickets(tenantId);
@@ -419,9 +484,10 @@ export const markCurrentTicketAbsentService = async (tenantId, userId = null) =>
   countersData.counters[counterIndex].updatedAt = new Date().toISOString();
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
+ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
 
-  await saveTicketsData(tenantId, ticketsData);
-  await saveCountersData(tenantId, countersData);
+await saveTicketsData(tenantId, ticketsData);
+await saveCountersData(tenantId, countersData);
 
   const absentTicket = ticketsData.tickets[ticketIndex];
   const allTickets = await getAllTickets(tenantId);
