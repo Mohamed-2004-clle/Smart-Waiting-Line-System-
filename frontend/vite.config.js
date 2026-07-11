@@ -1,10 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-})
+  plugins: [react()],
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    allowedHosts: [
+      "app.smartqueue.live",
+      "20.91.188.115",
+      "localhost",
+    ],
+  },
+});

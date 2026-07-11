@@ -64,6 +64,7 @@ const recalculateTrackQueueData = async (tenantId, tickets) => {
 
   return updatedTickets;
 };
+
 const notifyApproachingTickets = async (tenantId, tickets) => {
   for (const ticket of tickets) {
     if (
@@ -121,6 +122,17 @@ const notifyCalledTicket = async (tenantId, ticket) => {
   }
 
   return ticket;
+};
+
+// Run slow tasks in background so the UI response stays fast
+const runBackgroundTask = (label, task) => {
+  setImmediate(async () => {
+    try {
+      await task();
+    } catch (error) {
+      console.error(`${label}:`, error.message);
+    }
+  });
 };
 
 const getNextTrackForRole = async (tenantId, role) => {
@@ -202,17 +214,19 @@ export const createTicketService = async (
   const allTickets = await getAllTickets(tenantId);
   const createdTicket = allTickets.find((t) => t.id === ticket.id);
 
-  await logAuditEvent({
-    tenantId,
-    userId: null,
-    action: "CREATE_TICKET",
-    entityType: "ticket",
-    entityId: createdTicket.id,
-    details: {
-      number: createdTicket.number,
-      track: createdTicket.track,
-      customerType: createdTicket.customerType
-    }
+  runBackgroundTask("Background audit error after creating ticket", async () => {
+    await logAuditEvent({
+      tenantId,
+      userId: null,
+      action: "CREATE_TICKET",
+      entityType: "ticket",
+      entityId: createdTicket.id,
+      details: {
+        number: createdTicket.number,
+        track: createdTicket.track,
+        customerType: createdTicket.customerType
+      }
+    });
   });
 
   emitToTenant(tenantId, "queue_updated", allTickets);
@@ -345,32 +359,60 @@ export const callNextTicketService = async (tenantId, userId = null, role = null
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
 
-const updatedTicket = ticketsData.tickets[ticketIndex];
+  const updatedTicket = ticketsData.tickets[ticketIndex];
 
-await notifyCalledTicket(tenantId, updatedTicket);
-ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
+  // Save the main operation first
+  await saveTicketsData(tenantId, ticketsData);
+  await saveCountersData(tenantId, countersData);
 
-await saveTicketsData(tenantId, ticketsData);
-await saveCountersData(tenantId, countersData);
-  const allTickets = await getAllTickets(tenantId);
-
-  await logAuditEvent({
-    tenantId,
-    userId,
-    action: "CALL_NEXT_TICKET",
-    entityType: "ticket",
-    entityId: updatedTicket.id,
-    details: {
-      number: updatedTicket.number,
-      track: updatedTicket.track,
-      counterId: openCounter.id
-    }
-  });
-
+  // Emit socket updates immediately without waiting for slow operations
   emitToTenant(tenantId, "ticket_called", updatedTicket);
-  emitToTenant(tenantId, "queue_updated", allTickets);
+  emitToTenant(tenantId, "queue_updated", ticketsData.tickets);
   emitToTenant(tenantId, "counter_updated", countersData.counters[counterIndex]);
   emitToTenant(tenantId, `ticket_updated:${updatedTicket.id}`, updatedTicket);
+
+  // Audit log in background
+  runBackgroundTask("Background audit error after calling ticket", async () => {
+    await logAuditEvent({
+      tenantId,
+      userId,
+      action: "CALL_NEXT_TICKET",
+      entityType: "ticket",
+      entityId: updatedTicket.id,
+      details: {
+        number: updatedTicket.number,
+        track: updatedTicket.track,
+        counterId: openCounter.id
+      }
+    });
+  });
+
+  // Push notifications in background
+  runBackgroundTask("Background notification error after calling ticket", async () => {
+    const refreshedTicketsData = await getTicketsData(tenantId);
+
+    const calledTicket = refreshedTicketsData.tickets.find(
+      (ticket) => ticket.id === updatedTicket.id
+    );
+
+    if (calledTicket) {
+      await notifyCalledTicket(tenantId, calledTicket);
+    }
+
+    refreshedTicketsData.tickets = await notifyApproachingTickets(
+      tenantId,
+      refreshedTicketsData.tickets
+    );
+
+    await saveTicketsData(tenantId, refreshedTicketsData);
+
+    const refreshedAllTickets = await getAllTickets(tenantId);
+    emitToTenant(tenantId, "queue_updated", refreshedAllTickets);
+
+    if (calledTicket) {
+      emitToTenant(tenantId, `ticket_updated:${calledTicket.id}`, calledTicket);
+    }
+  });
 
   return updatedTicket;
 };
@@ -415,31 +457,54 @@ export const completeCurrentTicketService = async (tenantId, userId = null) => {
   countersData.counters[counterIndex].updatedAt = new Date().toISOString();
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
-ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
-
-await saveTicketsData(tenantId, ticketsData);
-await saveCountersData(tenantId, countersData);
 
   const completedTicket = ticketsData.tickets[ticketIndex];
-  const allTickets = await getAllTickets(tenantId);
 
-  await logAuditEvent({
-    tenantId,
-    userId,
-    action: "COMPLETE_TICKET",
-    entityType: "ticket",
-    entityId: completedTicket.id,
-    details: {
-      number: completedTicket.number,
-      track: completedTicket.track,
-      counterId: openCounter.id
-    }
-  });
+  // Save the main operation first
+  await saveTicketsData(tenantId, ticketsData);
+  await saveCountersData(tenantId, countersData);
 
+  // Emit socket updates immediately
   emitToTenant(tenantId, "ticket_completed", completedTicket);
-  emitToTenant(tenantId, "queue_updated", allTickets);
+  emitToTenant(tenantId, "queue_updated", ticketsData.tickets);
   emitToTenant(tenantId, "counter_updated", countersData.counters[counterIndex]);
   emitToTenant(tenantId, `ticket_updated:${completedTicket.id}`, completedTicket);
+
+  // Audit log in background
+  runBackgroundTask("Background audit error after completing ticket", async () => {
+    await logAuditEvent({
+      tenantId,
+      userId,
+      action: "COMPLETE_TICKET",
+      entityType: "ticket",
+      entityId: completedTicket.id,
+      details: {
+        number: completedTicket.number,
+        track: completedTicket.track,
+        counterId: openCounter.id
+      }
+    });
+  });
+
+  // Approaching notifications in background
+  runBackgroundTask("Background notification error after completing ticket", async () => {
+    const refreshedTicketsData = await getTicketsData(tenantId);
+
+    refreshedTicketsData.tickets = await recalculateTrackQueueData(
+      tenantId,
+      refreshedTicketsData.tickets
+    );
+
+    refreshedTicketsData.tickets = await notifyApproachingTickets(
+      tenantId,
+      refreshedTicketsData.tickets
+    );
+
+    await saveTicketsData(tenantId, refreshedTicketsData);
+
+    const refreshedAllTickets = await getAllTickets(tenantId);
+    emitToTenant(tenantId, "queue_updated", refreshedAllTickets);
+  });
 
   return completedTicket;
 };
@@ -484,31 +549,54 @@ export const markCurrentTicketAbsentService = async (tenantId, userId = null) =>
   countersData.counters[counterIndex].updatedAt = new Date().toISOString();
 
   ticketsData.tickets = await recalculateTrackQueueData(tenantId, ticketsData.tickets);
-ticketsData.tickets = await notifyApproachingTickets(tenantId, ticketsData.tickets);
-
-await saveTicketsData(tenantId, ticketsData);
-await saveCountersData(tenantId, countersData);
 
   const absentTicket = ticketsData.tickets[ticketIndex];
-  const allTickets = await getAllTickets(tenantId);
 
-  await logAuditEvent({
-    tenantId,
-    userId,
-    action: "MARK_TICKET_ABSENT",
-    entityType: "ticket",
-    entityId: absentTicket.id,
-    details: {
-      number: absentTicket.number,
-      track: absentTicket.track,
-      counterId: openCounter.id
-    }
-  });
+  // Save the main operation first
+  await saveTicketsData(tenantId, ticketsData);
+  await saveCountersData(tenantId, countersData);
 
+  // Emit socket updates immediately
   emitToTenant(tenantId, "ticket_absent", absentTicket);
-  emitToTenant(tenantId, "queue_updated", allTickets);
+  emitToTenant(tenantId, "queue_updated", ticketsData.tickets);
   emitToTenant(tenantId, "counter_updated", countersData.counters[counterIndex]);
   emitToTenant(tenantId, `ticket_updated:${absentTicket.id}`, absentTicket);
+
+  // Audit log in background
+  runBackgroundTask("Background audit error after marking ticket absent", async () => {
+    await logAuditEvent({
+      tenantId,
+      userId,
+      action: "MARK_TICKET_ABSENT",
+      entityType: "ticket",
+      entityId: absentTicket.id,
+      details: {
+        number: absentTicket.number,
+        track: absentTicket.track,
+        counterId: openCounter.id
+      }
+    });
+  });
+
+  // Approaching notifications in background
+  runBackgroundTask("Background notification error after marking ticket absent", async () => {
+    const refreshedTicketsData = await getTicketsData(tenantId);
+
+    refreshedTicketsData.tickets = await recalculateTrackQueueData(
+      tenantId,
+      refreshedTicketsData.tickets
+    );
+
+    refreshedTicketsData.tickets = await notifyApproachingTickets(
+      tenantId,
+      refreshedTicketsData.tickets
+    );
+
+    await saveTicketsData(tenantId, refreshedTicketsData);
+
+    const refreshedAllTickets = await getAllTickets(tenantId);
+    emitToTenant(tenantId, "queue_updated", refreshedAllTickets);
+  });
 
   return absentTicket;
 };

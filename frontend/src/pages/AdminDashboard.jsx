@@ -1,5 +1,5 @@
 // AdminDashboard.jsx
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getDashboardAnalytics } from "../services/analyticsService";
@@ -352,10 +352,13 @@ export default function AdminDashboard() {
   const [newAgentPassword, setNewAgentPassword] = useState("");
   const navigate = useNavigate();
 
-  const savedUser = getStoredUser();
-  const tenantId  = savedUser?.tenantId || "tenant-001";
-  const adminId   = savedUser?.id       || null;
-  const role      = savedUser?.role     || null;
+  const savedUser = useMemo(() => getStoredUser(), []);
+const tenantId  = savedUser?.tenantId || "tenant-001";
+const adminId   = savedUser?.id       || null;
+const role      = savedUser?.role     || null;
+
+const refreshTimerRef = useRef(null);
+const isRefreshingRef = useRef(false);  
 
   /* ── Memos (unchanged) ─────────────────────────────────── */
   const myCounter = useMemo(() =>
@@ -405,58 +408,149 @@ export default function AdminDashboard() {
     const result = await getAllUsers(tenantId);
     setUsers(result.data || []);
   };
-  const loadAllData = async () => {
-    try {
-      await Promise.all([loadAnalytics(), loadCounters(), loadTickets(), loadUsers()]);
-    } catch (error) {
-      console.error("Error loading admin dashboard:", error);
-      alert(error.response?.data?.message || "Failed to load dashboard");
-    } finally {
-      setLoading(false);
+  const loadAllData = useCallback(async (showPageLoading = false) => {
+  if (isRefreshingRef.current) return;
+
+  try {
+    isRefreshingRef.current = true;
+
+    if (showPageLoading) {
+      setLoading(true);
     }
-  };
+
+    const [analyticsResult, countersResult, ticketsResult, usersResult] =
+      await Promise.all([
+        getDashboardAnalytics(tenantId),
+        getAllCounters(tenantId),
+        getAllTickets(tenantId),
+        getAllUsers(tenantId),
+      ]);
+
+    const analyticsData = analyticsResult.data;
+    const countersData = countersResult.data || [];
+    const ticketsList = ticketsResult.data || [];
+    const usersData = usersResult.data || [];
+
+    setAnalytics(analyticsData);
+    setCounters(countersData);
+    setTickets(ticketsList);
+    setUsers(usersData);
+
+    const adminCounter = countersData.find(
+      (counter) =>
+        counter.requiredRole === "admin" &&
+        counter.currentStaffId === adminId
+    );
+
+    const calledTicket =
+      ticketsList.find(
+        (ticket) =>
+          ticket.status === "called" &&
+          adminCounter &&
+          ticket.counterId === adminCounter.id
+      ) || null;
+
+    setCurrentTicket(calledTicket);
+  } catch (error) {
+    console.error("Error loading admin dashboard:", error);
+    alert(error.response?.data?.message || "Failed to load dashboard");
+  } finally {
+    isRefreshingRef.current = false;
+    setLoading(false);
+  }
+}, [tenantId, adminId]);
+const scheduleRefresh = useCallback(() => {
+  if (refreshTimerRef.current) {
+    clearTimeout(refreshTimerRef.current);
+  }
+
+  refreshTimerRef.current = setTimeout(() => {
+    loadAllData(false);
+  }, 300);
+}, [loadAllData]);
 
   /* ── Handlers (all unchanged) ──────────────────────────── */
   const handleCallNext = async () => {
-    try {
-      setLoadingCall(true);
-      const result = await callNextTicket(tenantId);
-      setCurrentTicket(result.data);
-      await loadAllData();
-    } catch (error) {
-      console.error("Error calling next ticket:", error);
-      const message = error.response?.data?.message || "Call next failed";
-      if (error.response?.status === 404 &&
-        (message === "No waiting tickets available for your role" ||
-         message === "No waiting tickets found")) {
-        alert("No more waiting VIP tickets.");
-      } else { alert(message); }
-    } finally { setLoadingCall(false); }
-  };
+  try {
+    setLoadingCall(true);
+
+    const result = await callNextTicket(tenantId);
+    const calledTicket = result.data;
+
+    setCurrentTicket(calledTicket);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === calledTicket.id ? calledTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error calling next ticket:", error);
+    const message = error.response?.data?.message || "Call next failed";
+
+    if (
+      error.response?.status === 404 &&
+      (message === "No waiting tickets available for your role" ||
+        message === "No waiting tickets found")
+    ) {
+      alert("No more waiting VIP tickets.");
+    } else {
+      alert(message);
+    }
+  } finally {
+    setLoadingCall(false);
+  }
+};
 
   const handleCompleteTicket = async () => {
-    try {
-      setLoadingComplete(true);
-      await completeCurrentTicket(tenantId);
-      setCurrentTicket(null);
-      await loadAllData();
-    } catch (error) {
-      console.error("Error completing ticket:", error);
-      alert(error.response?.data?.message || "Complete failed");
-    } finally { setLoadingComplete(false); }
-  };
+  try {
+    setLoadingComplete(true);
+
+    const result = await completeCurrentTicket(tenantId);
+    const completedTicket = result.data;
+
+    setCurrentTicket(null);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === completedTicket.id ? completedTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error completing ticket:", error);
+    alert(error.response?.data?.message || "Complete failed");
+  } finally {
+    setLoadingComplete(false);
+  }
+};
 
   const handleMarkAbsent = async () => {
-    try {
-      setLoadingAbsent(true);
-      await markCurrentTicketAbsent(tenantId);
-      setCurrentTicket(null);
-      await loadAllData();
-    } catch (error) {
-      console.error("Error marking ticket absent:", error);
-      alert(error.response?.data?.message || "Mark absent failed");
-    } finally { setLoadingAbsent(false); }
-  };
+  try {
+    setLoadingAbsent(true);
+
+    const result = await markCurrentTicketAbsent(tenantId);
+    const absentTicket = result.data;
+
+    setCurrentTicket(null);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === absentTicket.id ? absentTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error marking ticket absent:", error);
+    alert(error.response?.data?.message || "Mark absent failed");
+  } finally {
+    setLoadingAbsent(false);
+  }
+};
 
   const handleCreateAgent = async () => {
     if (!newAgentFullName.trim() || !newAgentUsername.trim() || !newAgentPassword.trim()) {
@@ -528,30 +622,75 @@ export default function AdminDashboard() {
 
   /* ── Effects (all unchanged) ───────────────────────────── */
   useEffect(() => {
-    if (!savedUser) { navigate("/staff/login"); return; }
-    if (role !== "admin") { navigate("/staff/dashboard"); return; }
-    loadAllData();
-    joinTenantRoom(tenantId);
+  if (!savedUser) {
+    navigate("/staff/login");
+    return;
+  }
 
-    const handleConnect = () => joinTenantRoom(tenantId);
-    const handleRefresh = () => loadAllData();
+  if (role !== "admin") {
+    navigate("/staff/dashboard");
+    return;
+  }
 
-    socket.on("connect",          handleConnect);
-    socket.on("queue_updated",    handleRefresh);
-    socket.on("ticket_called",    handleRefresh);
-    socket.on("ticket_completed", handleRefresh);
-    socket.on("ticket_absent",    handleRefresh);
-    socket.on("counter_updated",  handleRefresh);
+  loadAllData(true);
+  joinTenantRoom(tenantId);
 
-    return () => {
-      socket.off("connect",          handleConnect);
-      socket.off("queue_updated",    handleRefresh);
-      socket.off("ticket_called",    handleRefresh);
-      socket.off("ticket_completed", handleRefresh);
-      socket.off("ticket_absent",    handleRefresh);
-      socket.off("counter_updated",  handleRefresh);
-    };
-  }, [tenantId, role, savedUser, navigate]);
+  const handleConnect = () => joinTenantRoom(tenantId);
+
+  const handleQueueUpdated = (updatedTickets) => {
+    if (Array.isArray(updatedTickets)) {
+      setTickets(updatedTickets);
+    } else {
+      scheduleRefresh();
+    }
+  };
+
+  const handleTicketUpdated = (updatedTicket) => {
+    if (!updatedTicket?.id) {
+      scheduleRefresh();
+      return;
+    }
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === updatedTicket.id ? updatedTicket : ticket
+      )
+    );
+  };
+
+  const handleCounterUpdated = (updatedCounter) => {
+    if (!updatedCounter?.id) {
+      scheduleRefresh();
+      return;
+    }
+
+    setCounters((prevCounters) =>
+      prevCounters.map((counter) =>
+        counter.id === updatedCounter.id ? updatedCounter : counter
+      )
+    );
+  };
+
+  socket.on("connect", handleConnect);
+  socket.on("queue_updated", handleQueueUpdated);
+  socket.on("ticket_called", handleTicketUpdated);
+  socket.on("ticket_completed", handleTicketUpdated);
+  socket.on("ticket_absent", handleTicketUpdated);
+  socket.on("counter_updated", handleCounterUpdated);
+
+  return () => {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+    }
+
+    socket.off("connect", handleConnect);
+    socket.off("queue_updated", handleQueueUpdated);
+    socket.off("ticket_called", handleTicketUpdated);
+    socket.off("ticket_completed", handleTicketUpdated);
+    socket.off("ticket_absent", handleTicketUpdated);
+    socket.off("counter_updated", handleCounterUpdated);
+  };
+}, [tenantId, role, savedUser, navigate, loadAllData, scheduleRefresh]);
 
   useEffect(() => {
     if (!myCounter) { setCurrentTicket(null); return; }

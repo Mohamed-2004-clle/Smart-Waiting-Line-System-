@@ -4,16 +4,18 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: smart-queue-backend
-    command: npm start
     ports:
       - "5000:5000"
     environment:
       NODE_ENV: production
       PORT: 5000
       JWT_SECRET: smart_queue_azure_demo_secret_2026
-      FRONTEND_BASE_URL: http://20.91.188.115:5173
+      FRONTEND_BASE_URL: https://app.smartqueue.live
       DEMO_TENANT_ID: tenant-001
       RESET_DEMO_ON_START: "true"
+      VAPID_PUBLIC_KEY: BHQ5mQZ0FgCMHL4JZT1McrgX1XZiunplrZtZZF68UwfrAQTH6nc2cEw4ZuJR6YkdwaZvrobB7obmoycqDIGBfRk
+      VAPID_PRIVATE_KEY: ILq4D97o9Y0mUnashXc1QMMc21cJV5j3rZ0ksqFVQpE
+      VAPID_SUBJECT: mailto:mohamedatike130@gmail.com
     volumes:
       - ./data:/data
     restart: unless-stopped
@@ -26,8 +28,9 @@ services:
     ports:
       - "5173:5173"
     environment:
-      VITE_API_BASE_URL: http://20.91.188.115:5000/api
-      VITE_SOCKET_URL: http://20.91.188.115:5000
+      VITE_API_BASE_URL: https://api.smartqueue.live/api
+      VITE_SOCKET_URL: https://api.smartqueue.live
+      VITE_VAPID_PUBLIC_KEY: BHQ5mQZ0FgCMHL4JZT1McrgX1XZiunplrZtZZF68UwfrAQTH6nc2cEw4ZuJR6YkdwaZvrobB7obmoycqDIGBfRk
     depends_on:
       - backend
     restart: unless-stopped

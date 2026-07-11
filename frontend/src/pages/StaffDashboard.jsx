@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -243,9 +243,12 @@ export default function StaffDashboard() {
   const [loadingLogout,   setLoadingLogout]   = useState(false);
   const navigate = useNavigate();
 
-  const savedUser  = getStoredUser();
-  const tenantId   = savedUser?.tenantId || "tenant-001";
-  const staffId    = savedUser?.id       || null;
+  const savedUser = useMemo(() => getStoredUser(), []);
+const tenantId = savedUser?.tenantId || "tenant-001";
+const staffId = savedUser?.id || null;
+
+const refreshTimerRef = useRef(null);
+const isRefreshingRef = useRef(false);
 
   const allowedTracks = useMemo(
     () => (Array.isArray(savedUser?.allowedTracks) ? savedUser.allowedTracks : []),
@@ -274,82 +277,150 @@ export default function StaffDashboard() {
   );
 
   // ── Data loaders ──────────────────────────────────────────
-  const loadTickets = async () => {
-    try {
-      const result = await getAllTickets(tenantId);
-      const allTickets = result.data || [];
-      setTickets(allTickets);
-      const calledTicket =
-        allTickets.find(
-          (t) => t.status === "called" && myCounter && t.counterId === myCounter.id
-        ) || null;
-      setCurrentTicket(calledTicket);
-    } catch (error) {
-      console.error("Error loading tickets:", error);
-    }
-  };
+  const findCurrentTicketForCounter = useCallback((ticketsList, countersList) => {
+  const agentCounter =
+    countersList.find(
+      (counter) =>
+        counter.requiredRole === "agent" &&
+        counter.currentStaffId === staffId
+    ) || null;
 
-  const loadCounters = async () => {
-    try {
-      const result = await getAllCounters(tenantId);
-      setCounters(result.data || []);
-    } catch (error) {
-      console.error("Error loading counters:", error);
-    }
-  };
+  if (!agentCounter) return null;
 
-  const loadAllData = async () => {
-    await Promise.all([loadCounters(), loadTickets()]);
-  };
+  return (
+    ticketsList.find(
+      (ticket) =>
+        ticket.status === "called" &&
+        ticket.counterId === agentCounter.id
+    ) || null
+  );
+}, [staffId]);
+
+const loadAllData = useCallback(async () => {
+  if (isRefreshingRef.current) return;
+
+  try {
+    isRefreshingRef.current = true;
+
+    const [countersResult, ticketsResult] = await Promise.all([
+      getAllCounters(tenantId),
+      getAllTickets(tenantId),
+    ]);
+
+    const countersList = countersResult.data || [];
+    const ticketsList = ticketsResult.data || [];
+
+    setCounters(countersList);
+    setTickets(ticketsList);
+    setCurrentTicket(findCurrentTicketForCounter(ticketsList, countersList));
+  } catch (error) {
+    console.error("Error loading staff dashboard:", error);
+  } finally {
+    isRefreshingRef.current = false;
+  }
+}, [tenantId, findCurrentTicketForCounter]);
+
+const loadCounters = useCallback(async () => {
+  try {
+    const result = await getAllCounters(tenantId);
+    setCounters(result.data || []);
+  } catch (error) {
+    console.error("Error loading counters:", error);
+  }
+}, [tenantId]);
+
+const scheduleRefresh = useCallback(() => {
+  if (refreshTimerRef.current) {
+    clearTimeout(refreshTimerRef.current);
+  }
+
+  refreshTimerRef.current = setTimeout(() => {
+    loadAllData();
+  }, 300);
+}, [loadAllData]);
 
   // ── Handlers ─────────────────────────────────────────────
   const handleCallNext = async () => {
-    try {
-      setLoadingCall(true);
-      const result = await callNextTicket(tenantId);
-      setCurrentTicket(result.data);
-    } catch (error) {
-      console.error("Error calling next ticket:", error);
-      const message = error.response?.data?.message || "Call next failed";
-      if (
-        error.response?.status === 404 &&
-        (message === "No waiting tickets available for your role" ||
-          message === "No waiting tickets found")
-      ) {
-        alert("No more waiting tickets in your allowed tracks.");
-      } else {
-        alert(message);
-      }
-    } finally {
-      setLoadingCall(false);
+  try {
+    setLoadingCall(true);
+
+    const result = await callNextTicket(tenantId);
+    const calledTicket = result.data;
+
+    setCurrentTicket(calledTicket);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === calledTicket.id ? calledTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error calling next ticket:", error);
+    const message = error.response?.data?.message || "Call next failed";
+
+    if (
+      error.response?.status === 404 &&
+      (message === "No waiting tickets available for your role" ||
+        message === "No waiting tickets found")
+    ) {
+      alert("No more waiting tickets in your allowed tracks.");
+    } else {
+      alert(message);
     }
-  };
+  } finally {
+    setLoadingCall(false);
+  }
+};
 
   const handleCompleteTicket = async () => {
-    try {
-      setLoadingComplete(true);
-      await completeCurrentTicket(tenantId);
-      setCurrentTicket(null);
-    } catch (error) {
-      console.error("Error completing ticket:", error);
-      alert(error.response?.data?.message || "Complete failed");
-    } finally {
-      setLoadingComplete(false);
-    }
-  };
+  try {
+    setLoadingComplete(true);
+
+    const result = await completeCurrentTicket(tenantId);
+    const completedTicket = result.data;
+
+    setCurrentTicket(null);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === completedTicket.id ? completedTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error completing ticket:", error);
+    alert(error.response?.data?.message || "Complete failed");
+  } finally {
+    setLoadingComplete(false);
+  }
+};
 
   const handleMarkAbsent = async () => {
-    try {
-      setLoadingAbsent(true);
-      await markCurrentTicketAbsent(tenantId);
-      setCurrentTicket(null);
-    } catch (error) {
-      console.error("Error marking ticket absent:", error);
-      alert(error.response?.data?.message || "Mark absent failed");
-    } finally {
-      setLoadingAbsent(false);
-    }
-  };
+  try {
+    setLoadingAbsent(true);
+
+    const result = await markCurrentTicketAbsent(tenantId);
+    const absentTicket = result.data;
+
+    setCurrentTicket(null);
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === absentTicket.id ? absentTicket : ticket
+      )
+    );
+
+    scheduleRefresh();
+  } catch (error) {
+    console.error("Error marking ticket absent:", error);
+    alert(error.response?.data?.message || "Mark absent failed");
+  } finally {
+    setLoadingAbsent(false);
+  }
+};
 
   const handleLogout = async () => {
     try {
@@ -368,48 +439,118 @@ export default function StaffDashboard() {
 
   // ── Socket & init ─────────────────────────────────────────
   useEffect(() => {
-    if (!savedUser) { navigate("/staff/login"); return; }
-    loadAllData();
-    joinTenantRoom(tenantId);
+  if (!savedUser) {
+    navigate("/staff/login");
+    return;
+  }
 
-    const handleConnect       = () => joinTenantRoom(tenantId);
-    const handleTicketCalled  = (ticket) => {
-      if (myCounter && ticket.counterId === myCounter.id) setCurrentTicket(ticket);
-    };
-    const handleTicketCompleted = (ticket) => {
-      if (myCounter && ticket.counterId === myCounter.id) setCurrentTicket(null);
-    };
-    const handleTicketAbsent  = (ticket) => {
-      if (myCounter && ticket.counterId === myCounter.id) setCurrentTicket(null);
-    };
-    const handleQueueUpdated  = (updatedTickets) => {
+  loadAllData();
+  joinTenantRoom(tenantId);
+
+  const handleConnect = () => joinTenantRoom(tenantId);
+
+  const handleQueueUpdated = (updatedTickets) => {
+    if (Array.isArray(updatedTickets)) {
       setTickets(updatedTickets);
-      const calledTicket =
-        updatedTickets.find(
-          (t) => t.status === "called" && myCounter && t.counterId === myCounter.id
-        ) || null;
-      setCurrentTicket(calledTicket);
-    };
-    const handleCounterUpdated = () => loadCounters();
 
-    socket.on("connect",          handleConnect);
-    socket.on("ticket_called",    handleTicketCalled);
-    socket.on("ticket_completed", handleTicketCompleted);
-    socket.on("ticket_absent",    handleTicketAbsent);
-    socket.on("queue_updated",    handleQueueUpdated);
-    socket.on("counter_updated",  handleCounterUpdated);
+      setCurrentTicket((previousCurrentTicket) => {
+        const counter =
+          counters.find(
+            (item) =>
+              item.requiredRole === "agent" &&
+              item.currentStaffId === staffId
+          ) || null;
 
-    return () => {
-      socket.off("connect",          handleConnect);
-      socket.off("ticket_called",    handleTicketCalled);
-      socket.off("ticket_completed", handleTicketCompleted);
-      socket.off("ticket_absent",    handleTicketAbsent);
-      socket.off("queue_updated",    handleQueueUpdated);
-      socket.off("counter_updated",  handleCounterUpdated);
-    };
-  }, [tenantId, myCounter, navigate, savedUser]);
+        if (!counter) return previousCurrentTicket;
 
-  useEffect(() => { loadTickets(); }, [myCounter]);
+        return (
+          updatedTickets.find(
+            (ticket) =>
+              ticket.status === "called" &&
+              ticket.counterId === counter.id
+          ) || null
+        );
+      });
+    } else {
+      scheduleRefresh();
+    }
+  };
+
+  const handleTicketUpdated = (updatedTicket) => {
+    if (!updatedTicket?.id) {
+      scheduleRefresh();
+      return;
+    }
+
+    setTickets((prevTickets) =>
+      prevTickets.map((ticket) =>
+        ticket.id === updatedTicket.id ? updatedTicket : ticket
+      )
+    );
+
+    setCurrentTicket((previousCurrentTicket) => {
+      if (
+        previousCurrentTicket &&
+        previousCurrentTicket.id === updatedTicket.id &&
+        updatedTicket.status !== "called"
+      ) {
+        return null;
+      }
+
+      if (
+        updatedTicket.status === "called" &&
+        myCounter &&
+        updatedTicket.counterId === myCounter.id
+      ) {
+        return updatedTicket;
+      }
+
+      return previousCurrentTicket;
+    });
+  };
+
+  const handleCounterUpdated = (updatedCounter) => {
+    if (!updatedCounter?.id) {
+      scheduleRefresh();
+      return;
+    }
+
+    setCounters((prevCounters) =>
+      prevCounters.map((counter) =>
+        counter.id === updatedCounter.id ? updatedCounter : counter
+      )
+    );
+  };
+
+  socket.on("connect", handleConnect);
+  socket.on("queue_updated", handleQueueUpdated);
+  socket.on("ticket_called", handleTicketUpdated);
+  socket.on("ticket_completed", handleTicketUpdated);
+  socket.on("ticket_absent", handleTicketUpdated);
+  socket.on("counter_updated", handleCounterUpdated);
+
+  return () => {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+    }
+
+    socket.off("connect", handleConnect);
+    socket.off("queue_updated", handleQueueUpdated);
+    socket.off("ticket_called", handleTicketUpdated);
+    socket.off("ticket_completed", handleTicketUpdated);
+    socket.off("ticket_absent", handleTicketUpdated);
+    socket.off("counter_updated", handleCounterUpdated);
+  };
+}, [
+  tenantId,
+  staffId,
+  savedUser,
+  navigate,
+  loadAllData,
+  scheduleRefresh,
+  counters,
+  myCounter,
+]);
 
   // ── Computed values ───────────────────────────────────────
   const canCallNext    = !loadingCall && !currentTicket && myCounter && myCounter?.status === "open";
